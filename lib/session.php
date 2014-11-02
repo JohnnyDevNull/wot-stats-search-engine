@@ -10,49 +10,49 @@ abstract class jpWotSession
 	/**
 	 * Starts or continue a session
 	 */
-    public static function start()
+	public static function start()
 	{
-        session_start();
-    }
+		session_start();
+	}
 
 	/**
 	 * @param string $key
 	 * @param mixed $value
 	 */
-    public static function set($key, $value)
+	public static function set($key, $value)
 	{
-        $_SESSION[$key] = $value;
-    }
+		$_SESSION[$key] = $value;
+	}
 
 	/**
 	 * @param string $key
 	 * @return mixed|false
 	 */
-    public static function get($key, $default = null)
+	public static function get($key, $default = null)
 	{
 		$ret = $default;
 
-        if(isset($_SESSION[$key])) {
-            $ret = $_SESSION[$key];
+		if(isset($_SESSION[$key])) {
+			$ret = $_SESSION[$key];
 		}
 
 		return $ret;
-    }
+	}
 
 	/**
 	 * @param string $key
 	 */
 	public static function unsetKey($key)
 	{
-        if(isset($_SESSION[$key])) {
-           unset($_SESSION[$key]);
+		if(isset($_SESSION[$key])) {
+		   unset($_SESSION[$key]);
 		}
 	}
 
 	/**
 	 * @return bool
 	 */
-    public static function destroy()
+	public static function destroy()
 	{
 		self::init();
 
@@ -74,7 +74,7 @@ abstract class jpWotSession
 		}
 
 		return session_destroy();
-    }
+	}
 
 	/**
 	 * Writes the session data and closes it.
@@ -93,4 +93,3 @@ abstract class jpWotSession
 		return session_regenerate_id($reset);
 	}
 }
-
