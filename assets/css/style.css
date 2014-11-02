@@ -1,0 +1,36 @@
+/**
+ * @package jpWot
+ * @author Philipp John <info@jplace.de>
+ * @copyright (c) 2014, Philipp John
+ * @license http://www.gnu.org/copyleft/gpl.html GNU v3 see also LICENSE.txt
+ */
+
+#main {
+	padding: 10px;
+	border-style: solid;
+	border-width: 0px 1px 1px 1px;
+	border-color: #ddd;;
+}
+
+.no_succession {
+	margin-bottom: 0px;
+}
+
+#filterarea {
+	margin-bottom: 10px;
+}
+
+#vehicles .vehicles-scrollbox {
+	max-height: 400px;
+	overflow-y: scroll;
+}
+
+#vehicles .vehicle-wrapper {
+	display: inline;
+}
+
+ #vehicles .vehicle-wrapper .level {
+	margin-left: 10px;
+	display: inline-block;
+	width: 40px;
+}
