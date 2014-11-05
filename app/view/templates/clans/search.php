@@ -7,11 +7,17 @@
  */
 
 $count = 0;
+
+if(!isset($data['result'])) {
+	$data['result'] = array();
+}
+
+$language = jpWotLanguage::getInstance();
 ?>
 <div class="row">
 	<div class="col-lg-12">
 		<form role="form"
-			  action="index.php?page=clans&sub=detail"
+			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
 			<table class="table table-striped">
 				<colgroup>
@@ -19,33 +25,36 @@ $count = 0;
 					<col />
 					<col />
 					<col />
+					<col />
 					<col style="width: 40px;"/>
 				</colgroup>
 				<tr>
-					<th>#</th>
-					<th>Nickname</th>
-					<th>ID</th>
-					<th>Account-ID</th>
+					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_COUNTER_TEXT')?></th>
+					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_ABBREVIATION_TEXT')?></th>
+					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_NAME_TEXT')?></th>
+					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_CLANID_TEXT')?></th>
+					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_LEADING_TEXT')?></th>
 					<th>
 						<span class="glyphicon glyphicon-cog"
-							  title="Actions"
+							  title="<?=$language->get('ICON_ACTIONS_TITLE')?>"
 							  style="margin-left: 5px;">
 						</span>
 					</th>
 				</tr>
-			<?php foreach($data as $searchResult) : ?>
+			<?php foreach($data['result'] as $searchResult) : ?>
 				<tr>
 					<td><?=++$count?></td>
-					<td><?=$searchResult->nickname?></td>
-					<td><?=$searchResult->id?></td>
-					<td><?=$searchResult->account_id?></td>
+					<td><?=$searchResult->abbreviation?></td>
+					<td><?=$searchResult->name?></td>
+					<td><?=$searchResult->clan_id?></td>
+					<td><?=$searchResult->owner_name?></td>
 					<td>
 						<button type="submit"
 								class="btn btn-default btn-xs"
 								name="request[clans][detail]"
-								value="<?=$searchResult->account_id?>">
+								value="<?=$searchResult->clan_id?>">
 							<span class="glyphicon glyphicon-search"
-								  title="Open detail view">
+								  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">
 							</span>
 						</button>
 					</td>

@@ -73,20 +73,7 @@ class jpWotModelAccounts extends jpWotModel
 			$this->_data['tankinfo'] = $this->getWiki (
 				'tankinfo',
 				implode(',', $tankIdArray),
-				array (
-					'name',
-					'name_i18n',
-					'nation',
-					'nation_i18n',
-					'tank_id',
-					'type',
-					'type_i18n',
-					'contour_image',
-					'image',
-					'image_small',
-					'level',
-					'short_name_i18n',
-				)
+				jpWotConfig::$wotApiFields['wiki']['tankinfo']
 			);
 		}
 

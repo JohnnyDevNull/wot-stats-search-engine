@@ -17,7 +17,7 @@ $language = jpWotLanguage::getInstance();
 <div class="row">
 	<div class="col-lg-12">
 		<form role="form"
-			  action="index.php?page=accounts&sub=detail"
+			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
 			<table class="table table-striped no_succession">
 				<colgroup>
