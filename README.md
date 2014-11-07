@@ -12,16 +12,17 @@ This project ist licenced under the **GNU General Public License in version 3** 
 
 ##### Pages
 - Full text searching for players and whatching the statistics profiles from the search list. **- finished**
-- Full text searching for clans and whatching the statistics of the whole clan and it's members. **- not finished**
-- Include Tankopedia to watch around the tanks and modules for them. **- not finished**
+- Full text searching for clans and whatching the statistics of the whole clan and it's members. **- finished**
+- Include Tankopedia to watch around the tanks and modules for them. **- removed**
 - Player rankings **- not finished**
+- Clan rankings **- not finished**
 
 ##### The Software
 - Based on a simple MVC structure developed by myself, to give you a simple way to customize it
 - All view relevant html data are outsourced in templates which contains only pure html for better customizing
 - config.php for presetting your own features
 - language translation with .ini files
-- included at the time "en-GB" and "de-DE"
+- included at the time "en-GB" and "de-DE" for all finished pages
 
 ### Installation
 
