@@ -8,6 +8,13 @@
 
 $info = $result['info']->$accountID;
 $statsAll = $info->statistics->all;
+
+$clan = false;
+
+if(!empty($info->clan)) {
+	$clan = $info->clan->{$info->clan_id};
+}
+
 $language = jpWotLanguage::getInstance();
 ?>
 <div class="row">
@@ -36,7 +43,14 @@ $language = jpWotLanguage::getInstance();
 			</tr>
 			<tr>
 				<td><?=$language->get('STATS_GENERAL_CLAN_LABEL')?></td>
-				<td><?=(empty($info->clan_id) ? 'none' : $info->clan_id)?></td>
+				<td>
+					<?php if ($clan === false) : ?>
+						<?=$language->get('TEXT_NO_CLAN')?>
+					<?php else : ?>
+						<span class="detail_clan_name"><?=$clan->name?></span>
+						<span class="detail_clan_tag">[<?=$clan->abbreviation?>]</span>
+					<?php endif; ?>
+				</td>
 			</tr>
 		</table>
 	</div>

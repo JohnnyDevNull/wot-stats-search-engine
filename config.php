@@ -38,10 +38,20 @@ abstract class jpWotConfig
 	public static $wotApiFields = array (
 		'accounts' => array (
 			'search' => array (
-				
+				'nickname',
+				'id',
+				'account_id',
 			),
 			'detail' => array (
-				
+				'nickname',
+				'account_id',
+				'created_at',
+				'updated_at',
+				'global_rating',
+				'client_language',
+				'clan_id',
+				'statistics.all',
+				'statistics.max_xp',
 			),
 		),
 		'clans' => array (
@@ -91,4 +101,9 @@ abstract class jpWotConfig
 			)
 		),
 	);
+
+	/**
+	 * @var bool
+	 */
+	public static $debug = true;
 }

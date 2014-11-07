@@ -28,7 +28,7 @@ $language = jpWotLanguage::getInstance();
 				  method="post">
 				<div class="form-group">
 					<?php
-					$this->_renderTemplate (
+					jpWotTemplate::render (
 						'filter.search',
 						array (
 							'last_value' => $search,
@@ -40,7 +40,7 @@ $language = jpWotLanguage::getInstance();
 				</div>
 				<div class="form-group">
 					<?php
-					$this->_renderTemplate (
+					jpWotTemplate::render (
 						'filter.limit',
 						array (
 							'last_value' => $limit,

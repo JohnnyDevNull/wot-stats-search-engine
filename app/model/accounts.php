@@ -18,21 +18,33 @@ class jpWotModelAccounts extends jpWotModel
 			case 'search':
 				$this->_data = $this->getUser (
 					'search',
-					$this->_requestData[$this->_apiCall]
+					$this->_requestData[$this->_apiCall],
+					jpWotConfig::$wotApiFields['accounts']['search']
 				);
 				break;
 
 			case 'detail':
-				$this->_data['account_id'] = $this->_requestData[$this->_apiCall];
+				$accountID = $this->_data['account_id'] = $this->_requestData[$this->_apiCall];
 
 				$this->_data['info'] = $this->getUser (
 					'info',
-					$this->_data['account_id']
+					$accountID,
+					jpWotConfig::$wotApiFields['accounts']['detail']
 				);
+
+				$clanID = $this->_data['info']->$accountID->clan_id;
+
+				if(!empty($clanID)) {
+					$this->_data['info']->$accountID->clan = $this->getClan (
+						'info',
+						$clanID,
+						array('name', 'abbreviation')
+					);
+				}
 
 				$this->_data['vehicles'] = $this->getUser (
 					'vehicles',
-					$this->_data['account_id']
+					$accountID
 				);
 
 				$this->_loadExtendedVehiclesData();

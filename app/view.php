@@ -33,18 +33,18 @@ class jpWotView
 	public function render()
 	{
 		$app = jpWotApp::getInstance();
-		$this->_renderTemplate('main.navigation');
+		jpWotTemplate::render('main.navigation');
 
 		?>
 		<div id="main" role="main">
 			<?php
-			$this->_renderTemplate (
+			jpWotTemplate::render (
 				$app->getPageKey().'.filterarea',
 				$this->_controller->getRequestData($app->getPageKey())
 			);
 
 			if(!empty($this->_model)) {
-				$this->_renderTemplate (
+				jpWotTemplate::render (
 					$app->getPageKey().'.'.$this->_model->getApiCall(),
 					array('result' => $this->_model->getData())
 				);
@@ -52,25 +52,5 @@ class jpWotView
 			?>
 		</div>
 		<?php
-	}
-
-	/**
-	 * @param string $path
-	 * @param array $data (optional) default empty array
-	 * @param string $extension (optional) default ".php"
-	 */
-	protected function _renderTemplate($path, $data = array(), $extension = 'php')
-	{
-		$parts = explode('.', $path);
-		$path = BPATH.'/app/view/templates/'.implode('/', $parts).'.'.$extension;
-
-		if(is_file($path)) {
-			if(!isset($data['page'])) {
-				$app = jpWotApp::getInstance();
-				$data['page'] = $app->getPageKey();
-			}
-
-			require_once $path;
-		}
 	}
 }

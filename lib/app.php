@@ -46,10 +46,32 @@ class jpWotApp
 		$this->_pageKey = getGetValue('page', 'accounts');
 		$this->_subKey = getGetValue('sub');
 
+		$sessionLang = jpWotSession::get('active_language');
+
+		if(empty($sessionLang)) {
+			jpWotSession::set (
+				'active_language',
+				strtolower(trim(jpWotConfig::$lang))
+			);
+		}
+
+		$changeLang = getPostValue('lang');
+
+		if(
+			isset($changeLang['current'], $changeLang['new'])
+			&& $changeLang['current'] != $changeLang['new']
+		) {
+			jpWotSession::set('active_language', $changeLang['new']);
+			$langKey = $changeLang['new'];
+		} else {
+			$langKey = jpWotSession::get('active_language');
+		}
+
+		$langKey = $this->getIniLanguageKey($langKey);
 		$language = jpWotLanguage::getInstance();
-		$language->load('main', BPATH);
-		$language->load('filter', BPATH);
-		$language->load($this->_pageKey, BPATH);
+		$language->load('main', BPATH, $langKey);
+		$language->load('filter', BPATH, $langKey);
+		$language->load($this->_pageKey, BPATH, $langKey);
 
 		$controller = $this->getControllerInstance();
 
@@ -129,5 +151,19 @@ class jpWotApp
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the needed language key for the ini files, e.g. "en-GB" or "de-DE"
+	 */
+	public function getIniLanguageKey($key)
+	{
+		switch($key) {
+			case 'en':
+				return 'en-GB';
+
+			default:
+				return strtolower($key).'-'.strtoupper($key);
+		}
 	}
 }

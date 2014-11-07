@@ -57,7 +57,41 @@ $language = jpWotLanguage::getInstance();
 					</td>
 					<td><?=$vehicle->statistics->battles?></td>
 					<td><?=$vehicle->statistics->wins?></td>
-					<td>-</td>
+					<td class="text-center">
+						<?php
+						$url = 'http://worldoftanks.eu/static/3.23.0.3/common/img/classes/';
+						
+						switch ($vehicle->mark_of_mastery) {
+							case 1:
+								$suffix = 'st';
+							case 2: 
+								$suffix = 'nd';
+							case 3: 
+								$suffix = 'rd';
+								$image = 'class-'.$vehicle->mark_of_mastery;
+								$title = $vehicle->mark_of_mastery.$suffix.' Class';
+								break;
+
+							case 4:	
+								$image = 'class-ace';
+								$title = 'Ace Tanker';
+								break;
+
+							case 0:
+							default:
+								$image = false;
+								break;
+						}
+
+						if($image !== false) :
+						?>
+						<img src="<?=$url.$image.'.png'?>"
+							 alt ="<?=$title?>"
+							 title="<?=$title?>" />
+						<?php else : ?>
+							-
+						<?php endif; ?>
+					</td>
 				</tr>
 			<?php endforeach; ?>
 			</table>

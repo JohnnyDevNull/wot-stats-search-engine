@@ -13,9 +13,6 @@ $items = array (
 	'clans' => array (
 		'LANG_CONSTANT' => 'CLANS'
 	),
-	'encyclopedia' => array (
-		'LANG_CONSTANT' => 'ENCYCLOPEDIA'
-	),
 	'ratings' => array (
 		'LANG_CONSTANT' => 'RATINGS'
 	),

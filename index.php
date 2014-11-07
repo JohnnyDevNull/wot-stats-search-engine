@@ -6,8 +6,6 @@
  * @license GNU General Public License version 3 or later; see LICENSE.md
  */
 
-error_reporting(E_ALL | E_STRICT);
-
 /**
  * Contains the base path of the app.
  *
@@ -20,8 +18,12 @@ require_once BPATH.'/inc/function.php';
 require_once BPATH.'/inc/wot.class.php';
 require_once BPATH.'/config.php';
 
-$app = jpWotApp::getInstance();
+if(jpWotConfig::$debug) {
+	error_reporting(E_ALL | E_STRICT);
+}
 
+jpWotSession::start();
+$app = jpWotApp::getInstance();
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,8 +62,13 @@ $app = jpWotApp::getInstance();
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12 text-center small text-muted">
-					&copy; <?=date('Y')?> JPlace <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
+				<div class="col-lg-12 small">
+					<span class="text-muted">
+						&copy; <?=date('Y')?> JPlace <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
+					</span>
+					<div class="lang_switcher pull-right">
+						<?=jpWotTemplate::render('filter.lang')?>
+					</div>
 				</div>
 			</div>
 		</div>
