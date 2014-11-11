@@ -17,6 +17,7 @@ $sessionLang = jpWotSession::get('active_language');
 			<i class="icon ico_de <?=($sessionLang == 'de') ? '' : 'inactive'?>"></i>
 			<span class="sr-only">Deutsch</span>
 		</a>
+<!--
 		<a title="Türkçe" data-langkey="tr">
 			<i class="icon ico_tr <?=($sessionLang == 'tr') ? '' : 'inactive'?>"></i>
 			<span class="sr-only">Türkçe</span>
@@ -33,6 +34,7 @@ $sessionLang = jpWotSession::get('active_language');
 			<i class="icon ico_pl <?=($sessionLang == 'pl') ? '' : 'inactive'?>"></i>
 			<span class="sr-only">Polski</span>
 		</a>
+-->
 	</div>
 </form>
 <script>

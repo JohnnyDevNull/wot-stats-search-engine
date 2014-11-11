@@ -6,6 +6,8 @@
  * @license GNU General Public License version 3 or later; see LICENSE.md
  */
 
+error_reporting(0);
+
 /**
  * Contains the base path of the app.
  *
@@ -19,7 +21,7 @@ require_once BPATH.'/inc/wot.class.php';
 require_once BPATH.'/config.php';
 
 if(jpWotConfig::$debug) {
-	error_reporting(E_ALL | E_STRICT);
+	error_reporting(E_ALL ^ E_STRICT);
 }
 
 jpWotSession::start();
@@ -28,6 +30,7 @@ $app = jpWotApp::getInstance();
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>wot-sse</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css" />
@@ -62,11 +65,11 @@ $app = jpWotApp::getInstance();
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12 small">
+				<div class="col-lg-12 small text-center">
 					<span class="text-muted">
 						&copy; <?=date('Y')?> JPlace <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
 					</span>
-					<div class="lang_switcher pull-right">
+					<div class="pull-right">
 						<?=jpWotTemplate::render('filter.lang')?>
 					</div>
 				</div>

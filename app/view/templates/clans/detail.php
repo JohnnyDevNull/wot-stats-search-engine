@@ -111,24 +111,23 @@ $language = jpWotLanguage::getInstance();
 								<td><?=$member->role_i18n?></td>
 								<td>
 									<?=$member->account_id?>
+								</td>
+								<td><?=date('d.m.Y', $member->created_at)?></td>
+								<td>
 									<form role="form"
 										  action="index.php?page=accounts&sub=detail"
 										  method="post"
 										  class="form-inline"
 										  style="display: inline;">
-
+										<button type="submit"
+												class="btn btn-default btn-xs"
+												name="request[accounts][detail]"
+												value="<?=$member->account_id?>">
+											<span class="glyphicon glyphicon-search"
+												  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">
+											</span>
+										</button>
 									</form>
-								</td>
-								<td><?=date('d.m.Y', $member->created_at)?></td>
-								<td>
-									<button type="submit"
-											class="btn btn-default btn-xs"
-											name="request[accounts][detail]"
-											value="<?=$member->account_id?>">
-										<span class="glyphicon glyphicon-search"
-											  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">
-										</span>
-									</button>
 								</td>
 							</tr>
 						<?php endforeach; ?>

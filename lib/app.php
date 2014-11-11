@@ -75,8 +75,10 @@ class jpWotApp
 
 		$controller = $this->getControllerInstance();
 
-		if(!empty(getPostValue('request'))) {
-			$controller->setRequestData(getPostValue('request'));
+		$page = getPostValue('request');
+
+		if(!empty($page)) {
+			$controller->setRequestData($page);
 		}
 
 		$controller->index();

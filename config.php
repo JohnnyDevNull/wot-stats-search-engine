@@ -105,5 +105,5 @@ abstract class jpWotConfig
 	/**
 	 * @var bool
 	 */
-	public static $debug = true;
+	public static $debug = false;
 }

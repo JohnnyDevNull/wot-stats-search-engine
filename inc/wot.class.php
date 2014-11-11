@@ -355,8 +355,7 @@ Class Wot
 				throw new InvalidArgumentException('Invalid value for parameter $request given: '.$request);
 		}
 
-		if(substr($u, -1, 1) !== '?')
-		{
+		if(substr($u, -1, 1) !== '?') {
 			$u .= '&';
 		}
 

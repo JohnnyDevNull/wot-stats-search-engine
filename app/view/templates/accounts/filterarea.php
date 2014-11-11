@@ -50,9 +50,9 @@ $language = jpWotLanguage::getInstance();
 					?>
 				</div>
 				<div class="form-group">
-						<input type="submit"
-							   class="btn btn-primary btn-sm"
-							   value="Filter anwenden">
+					<input type="submit"
+						   class="btn btn-primary btn-sm"
+						   value="<?=$language->get('FILTER_SUBMIT_BUTTON_TEXT')?>">
 				</div>
 			</form>
 		</div>
