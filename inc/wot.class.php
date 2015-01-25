@@ -6,8 +6,7 @@
  * @uses WotAPCCache
  * @package jpWot
  * @subpackage wot-api-description
- * @link https://github.com/thunder-spb/wot-api-description
- * @author thunder-spb
+ * @link https://github.com/JohnnyDevNull/wot-api-description/blob/master/php/wot.class.php
  */
 Class Wot
 {
@@ -160,6 +159,8 @@ Class Wot
 	 *		the needed $req_value will be the account_id.
 	 * @param array $fields
 	 * @return string
+	 * @link https://eu.wargaming.net/developers/api_reference/wot/account/list/
+	 * @throws InvalidArgumentException
 	 */
 	public function getUser($request, $req_value, $fields = array(), $hours_ago = 2)
 	{
@@ -202,14 +203,15 @@ Class Wot
 	}
 
 	/**
-	 * @throws InvalidArgumentException
-	 * @param string $request available values:
-	 *		"info",
-	 *		"search"
+	 * @param string $request available values:<br>
+	 *		"info",<br>
+	 *		"search"<br>
 	 *		otherwise an InvalidArgumentException will be thrown.
 	 * @param string $search_value
 	 * @param array $fields
 	 * @return string
+	 * @link https://eu.wargaming.net/developers/api_reference/wot/clan/list/
+	 * @throws InvalidArgumentException
 	 */
 	public function getClan($request, $search_value, $fields = array())
 	{
@@ -239,19 +241,21 @@ Class Wot
 
 	/**
 	 * @throws InvalidArgumentException
-	 * @param string $request available values:
-	 *		"tanks",
-	 *		"tankinfo",
-	 *		"tankengines",
-	 *		"tankguns",
-	 *		"tankradios",
-	 *		"tankchassis",
-	 *		"tankturrets",
-	 *		"achievements"
+	 * @param string $request available values:<br>
+	 *		"tanks",<br>
+	 *		"tankinfo",<br>
+	 *		"tankengines",<br>
+	 *		"tankguns",<br>
+	 *		"tankradios",<br>
+	 *		"tankchassis",<br>
+	 *		"tankturrets",<br>
+	 *		"achievements"<br>
 	 *		otherwise an InvalidArgumentException will be thrown.
 	 * @param string $req_value
 	 * @param array $fields
 	 * @return string
+	 * @link https://eu.wargaming.net/developers/api_reference/wot/encyclopedia/tanks/
+	 * @throws InvalidArgumentException
 	 */
 	public function getWiki($request, $req_value, $fields = array())
 	{
@@ -300,11 +304,18 @@ Class Wot
 	}
 
 	/**
-	 * @param string $request
+	 * @param string $request available values:<br>
+	 *		"types",<br>
+	 *		"dates",<br>
+	 *		"accounts" <b>Notice:</b> $req_value must be an array of: array('type', 'account_id'),<br>
+	 *		"neighbors" <b>Notice:</b> $req_value must be an array of: array('type', 'account_id', 'rank_field'),<br>
+	 *		"top" <b>Notice:</b> $req_value must be an array of: array('type', 'rank_field'),<br>
+	 *		otherwise an InvalidArgumentException will be thrown.
 	 * @param string|array $req_value
 	 * @param array $fields
 	 * @param string $date Date in UNIX timestamp or ISO 8601 format. E.g.: 1376542800 or 2013-08-15T00:00:00
 	 * @return string
+	 * @link https://eu.wargaming.net/developers/api_reference/wot/ratings/types/
 	 * @throws InvalidArgumentException
 	 */
 	public function getRatings($request, $req_value = '', $fields = array(), $date = 0)
