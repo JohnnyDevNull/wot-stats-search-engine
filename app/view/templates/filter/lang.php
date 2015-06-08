@@ -1,4 +1,11 @@
 <?php
+/**
+ * @package jpWot
+ * @author Philipp John <info@jplace.de>
+ * @copyright (c) 2014, Philipp John
+ * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
+ */
+
 $sessionLang = jpWotSession::get('active_language');
 ?>
 <form method="post" id="changeLangForm">
