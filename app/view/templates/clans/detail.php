@@ -102,7 +102,7 @@ $language = jpWotLanguage::getInstance();
 //							var_dump($member);
 //							echo '</pre';
 
-							$leader = $member->account_id == $info->owner_id ? 'style="font-weight: bold; color: navy;"' : '';
+							$leader = $member->account_id == $info->creator_id ? 'style="font-weight: bold; color: navy;"' : '';
 							?>
 							<tr <?=$leader?>>
 								<td><?=++$count?></td>
