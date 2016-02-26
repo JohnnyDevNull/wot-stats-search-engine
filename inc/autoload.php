@@ -6,10 +6,9 @@
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-$autoLoad = function($className)
-{
+$autoLoad = function($className) {
 	if(strpos($className, 'jp') === false) {
-		throw new LogicException('Wrong class name given, jpWot class prefix are missing: "'.$className.'"');
+		throw new LogicException('Wrong class name given, jpWot class prefix is missing: "'.$className.'"');
 	} else {
 		$className = str_replace('jpWot', '', $className);
 	}

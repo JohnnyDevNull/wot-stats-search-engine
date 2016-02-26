@@ -26,6 +26,7 @@ abstract class jpWotSession
 
 	/**
 	 * @param string $key
+	 * @param mixed $default [optional] default: null
 	 * @return mixed|false
 	 */
 	public static function get($key, $default = null)
@@ -85,7 +86,7 @@ abstract class jpWotSession
 	}
 
 	/**
-	 * @param bool $reset
+	 * @param bool $reset [optional] default: false
 	 * @return bool
 	 */
 	public static function regenerate($reset = false)

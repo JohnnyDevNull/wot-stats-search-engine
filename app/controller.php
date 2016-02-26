@@ -53,7 +53,7 @@ class jpWotController
 	/**
 	 * Returns the request specified by the given path.
 	 *
-	 * @param type $key
+	 * @param string $key
 	 */
 	public function getRequestDataByK($key)
 	{

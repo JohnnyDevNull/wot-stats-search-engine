@@ -18,7 +18,7 @@ class jpWotLanguage
 	private static $_cache = array();
 
 	/**
-	 * @return jpWotApp
+	 * @return jpWotLanguage
 	 */
 	public static function getInstance()
 	{
@@ -30,9 +30,9 @@ class jpWotLanguage
 	}
 
 	/**
-	 * @param string $component
-	 * @param string $basePath
-	 * @param string $langKey
+	 * @param string $component [optional] default: ''
+	 * @param string $basePath [optional] default: ''
+	 * @param string $langKey [optional] default: 'en-GB'
 	 * @return bool
 	 */
 	public function load($component = '', $basePath = '', $langKey = 'en-GB')
@@ -54,7 +54,7 @@ class jpWotLanguage
 
 	/**
 	 * @param string $const
-	 * @param mixed $default
+	 * @param mixed $default [optional] default: ''
 	 * @return string
 	 */
 	public function get($const, $default = '')

@@ -19,7 +19,7 @@ class jpWotView
 
 	/**
 	 * @param jpWotController $controller
-	 * @param jpWotModel $model (optional) default null
+	 * @param jpWotModel $model [optional] default: null
 	 */
 	public function __construct($controller, $model = null)
 	{

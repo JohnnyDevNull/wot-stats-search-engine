@@ -8,6 +8,7 @@
 
 /**
  * @param mixed $index
+ * @param mixed $default [optional] default: ''
  * @return mixed
  */
 function getPostValue($index, $default = '')
@@ -25,6 +26,7 @@ function getPostValue($index, $default = '')
 
 /**
  * @param mixed $index
+ * @param mixed $default [optional] default: ''
  * @return mixed
  */
 function getGetValue($index, $default = '')
@@ -61,7 +63,7 @@ function splitStringOnUpperCase($str)
  * Converts integer numbers to roman representation.
  *
  * @param int $integer
- * @param bool $upcase
+ * @param bool $upcase [optional] default: true
  * @return string
  * @link http://stackoverflow.com/a/15023547
  */

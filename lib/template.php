@@ -9,8 +9,8 @@ abstract class jpWotTemplate
 {
 	/**
 	 * @param string $path
-	 * @param array $data (optional) default empty array
-	 * @param string $extension (optional) default ".php"
+	 * @param array $data [optional] default: array()
+	 * @param string $extension [optional] default: 'php'
 	 */
 	public static function render($path, $data = array(), $extension = 'php')
 	{

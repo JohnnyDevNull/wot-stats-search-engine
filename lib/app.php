@@ -8,7 +8,7 @@
 class jpWotApp
 {
 	/**
-	 * @var tbApp
+	 * @var jpWotApp
 	 */
 	static private $_appInstance = null;
 
@@ -97,7 +97,7 @@ class jpWotApp
 	}
 
 	/**
-	 * @param string $key
+	 * @param string $key [optional] default: ''
 	 * @return false|jpWotController
 	 */
 	public function getControllerInstance($key = '')
@@ -157,6 +157,8 @@ class jpWotApp
 
 	/**
 	 * Returns the needed language key for the ini files, e.g. "en-GB" or "de-DE"
+	 *
+	 * @param string $key
 	 */
 	public function getIniLanguageKey($key)
 	{
