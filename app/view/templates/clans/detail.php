@@ -86,7 +86,7 @@ $language = jpWotLanguage::getInstance();
 								<th><?=$language->get('MEMBERS_TABLE_HEAD_NAME_TEXT')?></th>
 								<th><?=$language->get('MEMBERS_TABLE_HEAD_ROLE_TEXT')?></th>
 								<th><?=$language->get('MEMBERS_TABLE_HEAD_ID_TEXT')?></th>
-								<th><?=$language->get('MEMBERS_TABLE_HEAD_CREATED_TEXT')?></th>
+								<th><?=$language->get('MEMBERS_TABLE_HEAD_JOINED_TEXT')?></th>
 								<th>
 									<span class="glyphicon glyphicon-cog"
 										  title="<?=$language->get('ICON_ACTIONS_TITLE')?>"
@@ -97,7 +97,11 @@ $language = jpWotLanguage::getInstance();
 						</thead>
 						<tbody>
 						<?php foreach($info->members as $member) :
-							
+
+//							echo '<pre>';
+//							var_dump($member);
+//							echo '</pre';
+
 							$leader = $member->account_id == $info->owner_id ? 'style="font-weight: bold; color: navy;"' : '';
 							?>
 							<tr <?=$leader?>>
@@ -109,7 +113,7 @@ $language = jpWotLanguage::getInstance();
 								<td>
 									<?=$member->account_id?>
 								</td>
-								<td><?=date('d.m.Y', $member->created_at)?></td>
+								<td><?=date('d.m.Y', $member->joined_at)?></td>
 								<td>
 									<form role="form"
 										  action="index.php?page=accounts&sub=detail"
