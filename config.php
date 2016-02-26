@@ -39,7 +39,6 @@ abstract class jpWotConfig
 		'accounts' => array (
 			'search' => array (
 				'nickname',
-				'id',
 				'account_id',
 			),
 			'detail' => array (
@@ -56,31 +55,25 @@ abstract class jpWotConfig
 		),
 		'clans' => array (
 			'search' => array (
-				'owner_name',
 				'members_count',
 				'name',
 				'color',
-				'abbreviation',
 				'clan_id',
-				'owner_id',
 			),
 			'detail' => array (
-				'abbreviation',
+				'tag',
 				'clan_id',
 				'color',
 				'created_at',
 				'description',
 				'description_html',
 				'is_clan_disbanded',
-				'map_id',
 				'members_count',
 				'motto',
 				'name',
-				'owner_id',
-				'request_availability',
+				'creator_id',
+				'creator_name',
 				'updated_at',
-				'victory_points',
-				'victory_points_step_delta',
 				'members',
 			),
 		),

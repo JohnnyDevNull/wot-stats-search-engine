@@ -7,6 +7,11 @@
  */
 
 $result = $data['result'];
+
+//echo '<pre>';
+//var_dump($result);
+//echo '</pre>';
+
 $clanID = $result['clan_id'];
 $info = $result['info']->$clanID;
 $count = 0;
@@ -29,11 +34,11 @@ $language = jpWotLanguage::getInstance();
 									</tr>
 									<tr>
 										<td>Tag</td>
-										<td><?=$info->abbreviation?></td>
+										<td><?=$info->tag?></td>
 									</tr>
 									<tr>
 										<td>Leader</td>
-										<td><?=$info->owner_id?></td>
+										<td><?=$info->creator_name?></td>
 									</tr>
 									<tr>
 										<td>Clan Created</td>
@@ -42,14 +47,6 @@ $language = jpWotLanguage::getInstance();
 									<tr>
 										<td>Amount of members</td>
 										<td><?=$info->members_count?></td>
-									</tr>
-									<tr>
-										<td>Campaign total victory points</td>
-										<td><?=$info->victory_points?></td>
-									</tr>
-									<tr>
-										<td>Ongoing campaign victory points</td>
-										<td><?=$info->victory_points_step_delta?></td>
 									</tr>
 									<tr>
 										<td>Motto</td>

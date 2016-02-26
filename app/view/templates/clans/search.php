@@ -30,10 +30,8 @@ $language = jpWotLanguage::getInstance();
 				</colgroup>
 				<tr>
 					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_COUNTER_TEXT')?></th>
-					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_ABBREVIATION_TEXT')?></th>
 					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_NAME_TEXT')?></th>
 					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_CLANID_TEXT')?></th>
-					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_LEADING_TEXT')?></th>
 					<th>
 						<span class="glyphicon glyphicon-cog"
 							  title="<?=$language->get('ICON_ACTIONS_TITLE')?>"
@@ -41,13 +39,15 @@ $language = jpWotLanguage::getInstance();
 						</span>
 					</th>
 				</tr>
-			<?php foreach($data['result'] as $searchResult) : ?>
+			<?php foreach($data['result'] as $searchResult) :
+//				echo '<pre>';
+//				var_dump($searchResult);
+//				echo '</pre>';
+			?>
 				<tr>
 					<td><?=++$count?></td>
-					<td><?=$searchResult->abbreviation?></td>
 					<td><?=$searchResult->name?></td>
 					<td><?=$searchResult->clan_id?></td>
-					<td><?=$searchResult->owner_name?></td>
 					<td>
 						<button type="submit"
 								class="btn btn-default btn-xs"

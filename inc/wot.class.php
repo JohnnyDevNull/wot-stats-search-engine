@@ -215,7 +215,7 @@ Class Wot
 	 */
 	public function getClan($request, $search_value, $fields = array())
 	{
-		$u = $this->api_url.'/wot/clan/';
+		$u = $this->api_url.'/wgn/clans/';
 
 		switch ($request) {
 			case 'info':
