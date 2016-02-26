@@ -9,6 +9,10 @@
 $info = $result['info']->$accountID;
 $statsAll = $info->statistics->all;
 
+//echo '<pre>';
+//var_dump($statsAll);
+//echo '</pre>';
+
 $clan = false;
 
 if(!empty($info->clan)) {
@@ -83,7 +87,7 @@ $language = jpWotLanguage::getInstance();
 			</tr>
 			<tr>
 				<td><?=$language->get('STATS_OVERALL_MAX_XP_LABEL')?></td>
-				<td><?=number_format($info->statistics->max_xp)?></td>
+				<td><?=number_format($statsAll->max_xp)?></td>
 			</tr>
 		</table>
 	</div>

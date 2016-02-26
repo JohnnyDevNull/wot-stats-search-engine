@@ -7,6 +7,11 @@
  */
 
 $result = $data['result'];
+
+//echo '<pre>';
+//var_dump($result);
+//echo '</pre>';
+
 $accountID = $result['account_id'];
 ?>
 <div class="row">

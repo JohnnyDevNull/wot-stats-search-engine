@@ -53,7 +53,6 @@ abstract class jpWotConfig
 				'statistics.trees_cut',
 				'client_language',
 				'statistics.all',
-				'statistics.max_xp',
 			),
 		),
 		'clans' => array (
