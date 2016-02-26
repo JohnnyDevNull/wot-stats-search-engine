@@ -30,7 +30,6 @@ $language = jpWotLanguage::getInstance();
 				<tr>
 					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_COUNTER_TEXT')?></th>
 					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_NICK_TEXT')?></th>
-					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_ID_TEXT')?></th>
 					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_ACCID_TEXT')?></th>
 					<th>
 						<span class="glyphicon glyphicon-cog"
@@ -43,7 +42,6 @@ $language = jpWotLanguage::getInstance();
 				<tr>
 					<td><?=++$count?></td>
 					<td><?=$searchResult->nickname?></td>
-					<td><?=$searchResult->id?></td>
 					<td><?=$searchResult->account_id?></td>
 					<td>
 						<button type="submit"

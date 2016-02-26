@@ -46,7 +46,7 @@ $language = jpWotLanguage::getInstance();
 			?>
 				<tr>
 					<td><?=++$count?></td>
-					<td><?=$searchResult->name?></td>
+					<td><?=$searchResult->name?> [ <?=$searchResult->tag?> ]</td>
 					<td><?=$searchResult->clan_id?></td>
 					<td>
 						<button type="submit"

@@ -38,27 +38,32 @@ abstract class jpWotConfig
 	public static $wotApiFields = array (
 		'accounts' => array (
 			'search' => array (
-				'nickname',
 				'account_id',
+				'nickname',
 			),
 			'detail' => array (
-				'nickname',
 				'account_id',
-				'created_at',
-				'updated_at',
-				'global_rating',
-				'client_language',
 				'clan_id',
+				'created_at',
+				'global_rating',
+				'last_battle_time',
+				'nickname',
+				'updated_at',
+				'statistics.frags',
+				'statistics.trees_cut',
+				'client_language',
 				'statistics.all',
 				'statistics.max_xp',
 			),
 		),
 		'clans' => array (
 			'search' => array (
+				'clan_id',
+				'color',
+				'created_at',
 				'members_count',
 				'name',
-				'color',
-				'clan_id',
+				'tag',
 			),
 			'detail' => array (
 				'tag',
