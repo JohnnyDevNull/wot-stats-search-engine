@@ -2,8 +2,8 @@
 /**
  * Class which provides functions to get data from the invofficial World of Tanks web api.
  *
- * @uses WowtMemCache
- * @uses WowAPCCache
+ * @uses WotMemCache
+ * @uses WotAPCCache
  * @package wot-api-description
  */
 Class Wot
@@ -29,7 +29,7 @@ Class Wot
 	public $api_url;
 
 	/**
-	 * @var WowtMemCache|WowAPCCache
+	 * @var WotMemCache|WotAPCCache
 	 */
 	protected $_cache;
 
