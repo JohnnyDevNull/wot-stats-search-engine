@@ -95,8 +95,29 @@ abstract class jpWotConfig
 				'image_small',
 				'level',
 				'short_name_i18n',
-			)
+			),
 		),
+		'ratings' => array (
+			'accounts' => array (
+				'account_id',
+				'battles_to_play',
+				'battles_count',
+				'capture_points',
+				'damage_avg',
+				'damage_dealt',
+				'frags_avg',
+				'frags_count',
+				'global_rating',
+				'hits_ratio',
+				'spotted_avg',
+				'spotted_count',
+				'survived_ratio',
+				'wins_ratio',
+				'xp_amount',
+				'xp_avg',
+				'xp_max'
+			),
+		)
 	);
 
 	/**

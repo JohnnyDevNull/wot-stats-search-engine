@@ -2,8 +2,8 @@
 /**
  * Class which provides functions to get data from the invofficial World of Tanks web api.
  *
- * @uses WotMemCache
- * @uses WotAPCCache
+ * @uses WowtMemCache
+ * @uses WowAPCCache
  * @package wot-api-description
  */
 Class Wot
@@ -29,7 +29,7 @@ Class Wot
 	public $api_url;
 
 	/**
-	 * @var WotMemCache|WotAPCCache
+	 * @var WowtMemCache|WowAPCCache
 	 */
 	protected $_cache;
 
@@ -45,31 +45,7 @@ Class Wot
 	 */
 	public function __construct($region = 'RU', $lang = 'ru', $app_id = null)
 	{
-		switch ($region) {
-			case 'EU':
-				$this->region = 'EU';
-				$this->api_url = 'http://api.worldoftanks.eu';
-				break;
-
-			case 'NA':
-				$this->region = 'NA';
-				$this->api_url = 'http://api.worldoftanks.com';
-				break;
-
-			case 'ASIA':
-				$this->region = 'ASIA';
-				$this->api_url = 'http://api.worldoftanks.asia';
-				break;
-
-			case 'KR':
-				$this->region = 'KR';
-				$this->api_url = 'http://api.worldoftanks.kr';
-				break;
-
-			default:
-				$this->region = 'RU';
-				$this->api_url = 'http://api.worldoftanks.ru';
-		}
+		$this->setRegion($region);
 
 		$this->app_id = $app_id;
 		$this->lang = $lang;
@@ -80,7 +56,7 @@ Class Wot
 	 * @param string $type "memcache" or "apc", otherwise cache mode will be null.
 	 * @param array $params (optional) array('host', 'port'), only needed if Memcache will be used.
 	 */
-	public function setCacheType($type, $params = array())
+	public function setCacheType($type, $params = array('url' => '127.0.0.1', 'port' => 11211))
 	{
 		switch ($type) {
 			case 'memcache':
