@@ -1,5 +1,9 @@
 <?php
 /**
+ * Region class for all "Wargaming.NET" game apis, that are implemented.
+ *
+ * This class is used to set and get request relevant data by region.
+ *
  * @package jpWargamingApiReader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
@@ -10,7 +14,7 @@ class jpWargamingRegion
 	/**
 	 * @var string
 	 */
-	private $apiUrl;
+	private $url;
 
 	/**
 	 * @var string
@@ -37,37 +41,37 @@ class jpWargamingRegion
 		switch (strtoupper($region)) {
 			case 'EU':
 				$this->region = 'EU';
-				$this->apiUrl = 'http://api.worldoftanks.eu';
+				$this->url = 'api.worldoftanks.eu';
 				break;
 
 			case 'NA':
 				$this->region = 'NA';
-				$this->apiUrl = 'http://api.worldoftanks.com';
+				$this->url = 'api.worldoftanks.com';
 				break;
 
 			case 'ASIA':
 				$this->region = 'ASIA';
-				$this->apiUrl = 'http://api.worldoftanks.asia';
+				$this->url = 'api.worldoftanks.asia';
 				break;
 
 			case 'KR':
 				$this->region = 'KR';
-				$this->apiUrl = 'http://api.worldoftanks.kr';
+				$this->url = 'api.worldoftanks.kr';
 				break;
 
 			case 'RU':
 			default:
 				$this->region = 'RU';
-				$this->apiUrl = 'http://api.worldoftanks.ru';
+				$this->url = 'api.worldoftanks.ru';
 		}
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getApiUrl()
+	public function getUrl()
 	{
-		return $this->apiUrl;
+		return $this->url;
 	}
 
 	/**
@@ -95,11 +99,11 @@ class jpWargamingRegion
 	}
 
 	/**
-	 * @param string $apiUrl
+	 * @param string $url
 	 */
-	public function setApiUrl($apiUrl)
+	public function setUrl($url)
 	{
-		$this->apiUrl = $apiUrl;
+		$this->url = $url;
 	}
 
 	/**

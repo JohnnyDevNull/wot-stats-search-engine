@@ -1,5 +1,9 @@
 <?php
 /**
+ * Request class for all "Wargaming.NET" game apis, that are implemented.
+ *
+ * This class is used to perform the requests for all api classes.
+ *
  * @package jpWargamingApiReader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
@@ -7,6 +11,11 @@
  */
 class jpWargamingRequest
 {
+	/**
+	 * @var resource
+	 */
+	private $_ch;
+
 	/**
 	 * @var jpWargamingRegion
 	 */
@@ -23,6 +32,16 @@ class jpWargamingRequest
 	private $method = 'GET';
 
 	/**
+	 * @var bool
+	 */
+	private $decode = false;
+
+	/**
+	 * @var bool
+	 */
+	private $prettyPrint = false;
+
+	/**
 	 * @param jpWargamingRegion $region
 	 */
 	public function __construct(jpWargamingRegion $region)
@@ -35,17 +54,9 @@ class jpWargamingRequest
 	 */
 	public function __destruct()
 	{
-		if($this->_curl !== null) {
+		if($this->_ch !== null) {
 			curl_close($this->_ch);
 		}
-	}
-
-	/**
-	 * @param bool $bool
-	 */
-	public function setSecure($bool)
-	{
-		$this->secure = $bool;
 	}
 
 	/**
@@ -62,19 +73,20 @@ class jpWargamingRequest
 			$prot = 'https';
 		}
 
-		$url = $prot.'://'.$this->_region->getHost().$path;
+		$url = $prot.'://'.$this->region->getUrl().$path;
 
-		if(strpos($url, '?') !== false) {
-			$url .= '&';
+		$query = array_merge( $query, [
+			'language' => $this->region->getLang(),
+			'application_id' => $this->region->getAppId()
+		]);
+
+		if($this->method === 'GET') {
+			$url .= '?'.http_build_query($query);
+		} elseif ($this->method === 'POST') {
+			curl_setopt($this->_ch, CURLOPT_POST, 1);
+			curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $query);
 		} else {
-			$url .= '?';
-		}
-
-		$url .= 'language='.$this->region->getLang()
-			  . '&application_id='.$this->region->getAppId();
-
-		if(strpos('search', $url) !== false && !empty(WARGAMING_API_RESPONSE_LIMIT)) {
-			$url .= '&limit='.(int)WARGAMING_API_RESPONSE_LIMIT;
+			throw new LogicException('Invalid request method given.');
 		}
 
 		if($this->_ch === null) {
@@ -94,16 +106,81 @@ class jpWargamingRequest
 			]);
 		}
 
-		return json_decode($output, $assoc);
+		if($this->getPrettyPrint()) {
+			$output = json_decode($output);
+			$output = json_encode($output, JSON_PRETTY_PRINT);
+		}
+
+		if($this->getDecode()) {
+			$ret = json_decode($output, $assoc);
+		} else {
+			$ret = $output;
+		}
+
+		return $ret;
 	}
 
-	public function setUsePost()
+	/**
+	 * @param bool $bool
+	 */
+	public function setSecure($bool)
+	{
+		$this->secure = $bool;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSecure()
+	{
+		return $this->secure;
+	}
+
+	/**
+	 * Sets the request method fix to POST
+	 */
+	public function setPostMethod()
 	{
 		$this->method = 'POST';
 	}
 
-	public function setUseGet()
+	/**
+	 * Sets the request method fix to GET
+	 */
+	public function setGetMethod()
 	{
 		$this->method = 'GET';
+	}
+
+	/**
+	 * @param bool $bool
+	 */
+	public function setDecode($bool)
+	{
+		$this->decode = (bool)$bool;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getDecode()
+	{
+		return $this->decode;
+	}
+
+	/**
+	 * @param $bool
+	 */
+	public function setPrettyPrint($bool)
+	{
+		$this->prettyPrint = (bool)$bool;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getPrettyPrint()
+	{
+		return $this->prettyPrint;
 	}
 }

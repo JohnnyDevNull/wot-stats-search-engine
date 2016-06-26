@@ -1,11 +1,15 @@
 <?php
 /**
+ * "World of Tanks" api reader class.
+ *
+ * @see https://eu.wargaming.net/developers/api_reference/
+ *
  * @package jpWargamingApiReader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-class jpWargamingWot extends jpWargamingBase
+class jpWargamingReaderWot extends jpWargamingBase
 {
 	/**
 	 * Request /wot/account/list/<br><br>Method returns partial list of players.
@@ -31,11 +35,11 @@ class jpWargamingWot extends jpWargamingBase
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/account/list/
 	 */
-	public function getAccountList($search, $fields, $type = '', $limit = 100)
+	public function getAccountList($search, $fields = '', $type = '', $limit = 100)
 	{
 		return $this->request->perform('/wot/account/list/', [
 			'search' => $search,
-			'fields' => $this->getFieldsString($fields),
+			'fields' => $this->toListString($fields),
 			'type' => $type,
 			'limit' => $limit,
 		]);
@@ -83,6 +87,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * expiration time.
 	 * @param int|int[] $tankId Player's vehicle ID
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/account/tanks/
 	 */
 	public function getAccountVehicles($accountId, $fields = '',
@@ -92,7 +97,7 @@ class jpWargamingWot extends jpWargamingBase
 			'account_id' => $this->toListString($accountId),
 			'fields' => $this->toListString($fields),
 			'access_token' => $accessToken,
-			'extra' => $this->toListString($extra),
+			'tank_id' => $this->toListString($tankId),
 		]);
 	}
 
@@ -113,6 +118,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/account/achievements/
 	 */
 	public function getAccountAchievments($accountId, $fields = '')
@@ -136,6 +142,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * personal user data.<br>The token is obtained via authentication and
 	 * has expiration time.
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/stronghold/info/
 	 */
 	public function getStrongholdInfo($clanId, $fields = '', $accessToken = '')
@@ -151,11 +158,12 @@ class jpWargamingWot extends jpWargamingBase
 	 * Request /wot/stronghold/buildings/<br><br>Method returns encyclopedia
 	 * information on all structures of the Stronghold.
 	 *
-	 * @param type $fields [optional] Response field. The fields are separated
+	 * @param string|string[] $fields [optional] Response field. The fields are separated
 	 * with commas. Embedded fields are separated with dots.<br>To exclude a
 	 * field, use “-” in front of its name. In case the parameter is not defined,
 	 * the method returns all fields.
 	 *
+	 * @return mixed
 	 * @seehttps://eu.wargaming.net/developers/api_reference/wot/stronghold/buildings/
 	 */
 	public function getStrongholdStructure($fields = '')
@@ -169,7 +177,6 @@ class jpWargamingWot extends jpWargamingBase
 	 * Request /wot/stronghold/accountstats/<br><br>Method returns player stats
 	 * for the current clan's Stronghold.
 	 *
-	 * @param type $accountId Player account ID
 	 * @param string|string[] $fields [optional] Response field. The fields are
 	 * separated with commas. Embedded fields are separated with dots.<br>To
 	 * exclude a field, use “-” in front of its name. In case the parameter is
@@ -178,6 +185,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * personal user data.<br>The token is obtained via authentication and
 	 * has expiration time.
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/stronghold/accountstats/
 	 */
 	public function getStrongholdAccountstats($fields = '', $accessToken = '')
@@ -199,6 +207,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/stronghold/plannedbattles/
 	 */
 	public function getStrongholdPlannedbattles($clanId, $fields = '')
@@ -227,6 +236,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * <li>"SPG" — SPG</li></ul>
 	 * @param int|int[] $tier [optional] Tier
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/encyclopedia/vehicles/
 	 */
 	public function getEncyclopediaVehicles($tankId = 0, $fields = '',
@@ -263,11 +273,12 @@ class jpWargamingWot extends jpWargamingBase
 	 * @param string $profileId [optional] Configuration ID. If specified,
 	 * parameters of IDs of separate modules are ignored.
 	 *
+	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wot/encyclopedia/vehicleprofile/
 	 */
 	public function getEncyclopediaVehicleprofile($tankId, $fields = '',
 		$engineId = 0, $gunId = 0, $suspensionId = 0, $turretId = 0,
-		$radioId = 0, $profileId = 0
+		$radioId = 0, $profileId = ''
 	) {
 		return $this->request->perform('/wot/encyclopedia/vehicleprofile/', [
 			'tank_id' => $this->toListString($tankId),
@@ -294,6 +305,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * <ul><li>"price_credit" — by cost in credits</li>
 	 * <li>"-price_credit" — by cost in credits, in reverse order</li></ul>
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/vehicleprofiles/
 	 */
 	public function getEncyclopediaVehicleprofiles($tankId, $fields = '',
@@ -314,6 +326,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/achievements/
 	 */
 	public function getEncyclopediaAchievements($fields)
@@ -332,6 +345,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/info/
 	 */
 	public function getEncyclopediaInfo($fields)
@@ -350,6 +364,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/arenas/
 	 */
 	public function getEncyclopediaArenas($fields)
@@ -372,6 +387,7 @@ class jpWargamingWot extends jpWargamingBase
 	 * <li>"optionalDevice" — Equipment</li></ul>
 	 * @param int|int[] $provisionId
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/provisions/
 	 */
 	public function getEncyclopediaProvisions($fields, $type = '',
@@ -398,12 +414,19 @@ class jpWargamingWot extends jpWargamingBase
 	 * @param int|int[] $setId [optional]
 	 * @param string|string[] $tag [optional]
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/personalmissions/
 	 */
 	public function getEncyclopediaPersonalmissions($fields = '',
 		$campaignId = 0, $operationId = 0, $setId = 0, $tag = ''
 	) {
-
+		return $this->request->perform('/wot/encyclopedia/personalmissions/', [
+			'fields' => $this->toListString($fields),
+			'campaign_id' => $campaignId,
+			'operation_id' => $operationId,
+			'set_id' => $setId,
+			'tag' => $tag,
+		]);
 	}
 
 	/**
@@ -415,11 +438,14 @@ class jpWargamingWot extends jpWargamingBase
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/boosters/
 	 */
 	public function getEncyclopediaBoosters($fields = '')
 	{
-
+		return $this->request->perform('/wot/encyclopedia/boosters/', [
+			'fields' => $this->toListString($fields),
+		]);
 	}
 
 	/**
@@ -438,16 +464,23 @@ class jpWargamingWot extends jpWargamingBase
 	 * separated with commas. Embedded fields are separated with dots.<br>To
 	 * exclude a field, use “-” in front of its name. In case the parameter is
 	 * not defined, the method returns all fields.
-	 * @param int|int[] $extra [optional] Extra fields to be included into the
+	 * @param string|string[] $extra [optional] Extra fields to be included into the
 	 * response. Valid values: default_profile
 	 * @param int|int[] Module ID. Max limit is 100
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/encyclopedia/modules/
 	 */
 	public function getEncyclopediaModules($type, $nation, $fields = '',
 		$extra = '', $moduleId = 0
 	) {
-
+		return $this->request->perform('/wot/encyclopedia/modules/', [
+			'type' => $type,
+			'nation' => $nation,
+			'fields' => $this->toListString($fields),
+			'extra' => $this->toListString($extra),
+			'module_id' => $moduleId,
+		]);
 	}
 
 	/**
@@ -464,11 +497,15 @@ class jpWargamingWot extends jpWargamingBase
 	 * <li>"team" — Team Battles</li>
 	 * <li>"default" — any battle type (by default)</li></ul>
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/ratings/types/
 	 */
 	public function getRatingsTypes($fields = '', $battleType = '')
 	{
-
+		return $this->request->perform('/wot/ratings/types/', [
+			'fields' => $this->toListString($fields),
+			'extra' => $battleType,
+		]);
 	}
 
 	/**
@@ -487,12 +524,18 @@ class jpWargamingWot extends jpWargamingBase
 	 * <li>"default" — any battle type (by default)</li></ul>
 	 * @param int|int[] $accountId Player account ID
 	 *
+	 * @return mixed
 	 * @see http://eu.wargaming.net/developers/api_reference/wot/ratings/dates/
 	 */
 	public function getRatingsDates($type, $fields = '', $battleType = '',
 		$accountId = 0
 	) {
-
+		return $this->request->perform('/wot/ratings/dates/', [
+			'type' => $type,
+			'fields' => $this->toListString($fields),
+			'battle_type' => $battleType,
+			'account_id' => $accountId,
+		]);
 	}
 
 	/**
@@ -513,11 +556,20 @@ class jpWargamingWot extends jpWargamingBase
 	 * @param int|string $date [optional] Ratings calculation date. Up to 7 days
 	 * before the current date; default value: yesterday.<br>Date in UNIX
 	 * timestamp or ISO 8601 format. E.g.: 1376542800 or 2013-08-15T00:00:00
+	 *
+	 * @return mixed
+	 * @see https://eu.wargaming.net/developers/api_reference/wot/ratings/accounts/
 	 */
 	public function getRatingsAccounts($type, $accountId, $fields = '',
 		$battleType = '', $date = 0
 	) {
-
+		return $this->request->perform('/wot/ratings/accounts/', [
+			'type' => $type,
+			'account_id' => $accountId,
+			'fields' => $this->toListString($fields),
+			'battle_type' => $battleType,
+			'date' => $date,
+		]);
 	}
 
 	/**
@@ -539,11 +591,21 @@ class jpWargamingWot extends jpWargamingBase
 	 * @param int|string $date [optional] Ratings calculation date. Up to 7 days
 	 * before the current date; default value: yesterday.<br>Date in UNIX
 	 * timestamp or ISO 8601 format. E.g.: 1376542800 or 2013-08-15T00:00:00
+	 *
+	 * @return mixed
+	 * @see https://eu.wargaming.net/developers/api_reference/wot/ratings/neighbors/
 	 */
 	public function getRatingsNeighbors($type, $accoutnId, $rankField,
 		$fields = '', $battleType = '', $date = 0
 	) {
-
+		return $this->request->perform('/wot/ratings/neighbors/', [
+			'type' => $type,
+			'account_id' => $accoutnId,
+			'rank_field' => $rankField,
+			'fields' => $this->toListString($fields),
+			'battle_type' => $battleType,
+			'date' => $date,
+		]);
 	}
 
 	/**
@@ -564,10 +626,19 @@ class jpWargamingWot extends jpWargamingBase
 	 * @param int|string $date [optional] Ratings calculation date. Up to 7 days
 	 * before the current date; default value: yesterday.<br>Date in UNIX
 	 * timestamp or ISO 8601 format. E.g.: 1376542800 or 2013-08-15T00:00:00
+	 *
+	 * @return mixed
+	 * @see https://eu.wargaming.net/developers/api_reference/wot/ratings/top/
 	 */
 	public function getRatingsTop($type, $rankField, $fields = '',
 		$battleType = '', $date = 0
 	) {
-
+		return $this->request->perform('/wot/ratings/neighbors/', [
+			'type' => $type,
+			'rank_field' => $rankField,
+			'fields' => $this->toListString($fields),
+			'battle_type' => $battleType,
+			'date' => $date,
+		]);
 	}
 }

@@ -45,5 +45,8 @@ Temporary Items
 # Netbeans IDE
 nbproject
 
+# phpStorm
+.idea
+
 # Other user defined
 devfile.php
