@@ -36,7 +36,6 @@ $app = jpWseApp::getInstance();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-override.css" />
 		<link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 		<script src="./assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
 		<script src="./assets/js/jquery.form.js" type="text/javascript"></script>
@@ -54,11 +53,7 @@ $app = jpWseApp::getInstance();
 	<body>
 		<div class="container">
 			<div class="page-header" id="tb_logo">
-				<img src="./assets/img/wot-logo.png"
-					 alt="World of Tanks Logo"
-					 title="World of Tanks"
-					 style="max-width: 160px; display: inline-block;"/>
-				<h1 style="display: inline-block;">WG-Games Search Engine</h1>
+				<h1>WGGames Search Engine</h1>
 			</div>
 			<div class="row" id="contentbox">
 				<div class="col-lg-12">
@@ -71,7 +66,7 @@ $app = jpWseApp::getInstance();
 						&copy; <?=date('Y')?> JPlace <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
 					</span>
 					<div class="pull-right">
-						<?=jpWseTemplate::render('filter.lang')?>
+						<?php jpWseTemplate::render('filter.lang') ?>
 					</div>
 				</div>
 			</div>

@@ -8,6 +8,7 @@
 
 $search = '';
 $limit = 20;
+$game = jpWseConfig::$game;
 
 if(!empty($data['accounts']['search'])) {
 	$search = $data['accounts']['search'];
@@ -15,6 +16,10 @@ if(!empty($data['accounts']['search'])) {
 
 if(!empty($data['accounts']['limit'])) {
 	$limit = $data['accounts']['limit'];
+}
+
+if(!empty($data['accounts']['game'])) {
+	$game = $data['accounts']['game'];
 }
 
 $language = jpWseLanguage::getInstance();
@@ -45,6 +50,17 @@ $language = jpWseLanguage::getInstance();
 						array (
 							'last_value' => $limit,
 							'title' => $language->get('FILTER_LIMIT_TITLE')
+						)
+					);
+					?>
+				</div>
+				<div class="form-group">
+					<?php
+					jpWseTemplate::render (
+						'filter.game',
+						array (
+							'last_value' => $game,
+							'title' => $language->get('FILTER_GAME_TITLE')
 						)
 					);
 					?>
