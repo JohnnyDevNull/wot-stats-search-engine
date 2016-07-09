@@ -1,11 +1,11 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-class jpWotModelClans extends jpWotModel
+class jpWseModelClans extends jpWseModel
 {
 	/**
 	 * Loads the display data from given request.
@@ -16,20 +16,18 @@ class jpWotModelClans extends jpWotModel
 
 		switch($this->_apiCall) {
 			case 'search':
-				$this->_data = $this->getClan (
-					'search',
+				$this->_data = $this->_clanReader->getClansList (
 					$this->_requestData[$this->_apiCall],
-					jpWotConfig::$wotApiFields['clans']['search']
+					jpWseConfig::$wotApiFields['clans']['search']
 				);
 				break;
 
 			case 'detail':
 				$this->_data['clan_id'] = $this->_requestData[$this->_apiCall];
 
-				$this->_data['info'] = $this->getClan (
-					'info',
+				$this->_data['info'] = $this->_clanReader->getClansInfo (
 					$this->_data['clan_id'],
-					jpWotConfig::$wotApiFields['clans']['detail']
+					jpWseConfig::$wotApiFields['clans']['detail']
 				);
 
 				break;

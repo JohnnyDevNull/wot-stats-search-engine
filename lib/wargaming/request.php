@@ -4,7 +4,7 @@
  *
  * This class is used to perform the requests for all api classes.
  *
- * @package jpWargamingApiReader
+ * @package jp-wargaming-api-reader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
@@ -42,6 +42,16 @@ class jpWargamingRequest
 	private $prettyPrint = false;
 
 	/**
+	 * @var bool
+	 */
+	private $assoc = false;
+
+	/**
+	 * @var mixed[]
+	 */
+	private $lastRequest = [];
+
+	/**
 	 * @param jpWargamingRegion $region
 	 */
 	public function __construct(jpWargamingRegion $region)
@@ -62,23 +72,29 @@ class jpWargamingRequest
 	/**
 	 * @param string $path
 	 * @param mixed[] $query
-	 * @param bool $assoc
 	 * @return mixed
 	 */
-	public function perform($path, array $query, $assoc = false)
+	public function perform($path, array $query)
 	{
-		$prot = 'http';
-
-		if($this->secure) {
-			$prot = 'https';
+		if($this->_ch === null) {
+			$this->_ch = curl_init();
+			curl_setopt($this->_ch, CURLOPT_FORBID_REUSE, 0);
 		}
 
-		$url = $prot.'://'.$this->region->getUrl().$path;
+		$url = 'http';
+
+		if($this->secure) {
+			$url = 'https';
+		}
+
+		$url .= '://'.$this->region->getUrl().$path;
 
 		$query = array_merge( $query, [
 			'language' => $this->region->getLang(),
 			'application_id' => $this->region->getAppId()
 		]);
+
+		$query = array_filter($query);
 
 		if($this->method === 'GET') {
 			$url .= '?'.http_build_query($query);
@@ -87,11 +103,6 @@ class jpWargamingRequest
 			curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $query);
 		} else {
 			throw new LogicException('Invalid request method given.');
-		}
-
-		if($this->_ch === null) {
-			$this->_ch = curl_init();
-			curl_setopt($this->_ch, CURLOPT_FORBID_REUSE, 0);
 		}
 
 		curl_setopt($this->_ch, CURLOPT_URL, $url);
@@ -112,12 +123,38 @@ class jpWargamingRequest
 		}
 
 		if($this->getDecode()) {
-			$ret = json_decode($output, $assoc);
+			$response = json_decode($output, $this->getAssoc());
 		} else {
-			$ret = $output;
+			$response = $output;
 		}
 
-		return $ret;
+		$this->setLastRequest($this->method, $url, $query, $response);
+
+		return $response;
+	}
+
+	/**
+	 * @param string $method
+	 * @param string $url
+	 * @param mixed[] $query
+	 * @param string|mixed[]|stdClass $response
+	 */
+	private function setLastRequest($method, $url, $query, $response)
+	{
+		$this->lastRequest = [
+			'method' => $method,
+			'url' => $url,
+			'query' => $query,
+			'response' => $response,
+		];
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function getLastRequest()
+	{
+		return $this->lastRequest;
 	}
 
 	/**
@@ -182,5 +219,21 @@ class jpWargamingRequest
 	public function getPrettyPrint()
 	{
 		return $this->prettyPrint;
+	}
+
+	/**
+	 * @param $bool
+	 */
+	public function setAssoc($bool)
+	{
+		$this->assoc = (bool)$bool;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getAssoc()
+	{
+		return $this->assoc;
 	}
 }

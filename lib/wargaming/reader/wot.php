@@ -4,13 +4,18 @@
  *
  * @see https://eu.wargaming.net/developers/api_reference/
  *
- * @package jpWargamingApiReader
+ * @package jp-wargaming-api-reader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 class jpWargamingReaderWot extends jpWargamingBase
 {
+	/**
+	 * @var string
+	 */
+	protected $api = 'worldoftanks';
+
 	/**
 	 * Request /wot/account/list/<br><br>Method returns partial list of players.
 	 * The list is filtered by initial characters of user name and sorted
@@ -281,7 +286,7 @@ class jpWargamingReaderWot extends jpWargamingBase
 		$radioId = 0, $profileId = ''
 	) {
 		return $this->request->perform('/wot/encyclopedia/vehicleprofile/', [
-			'tank_id' => $this->toListString($tankId),
+			'tank_id' => (int)$tankId,
 			'fields' => $this->toListString($fields),
 			'engine_id' => (int)$engineId,
 			'gun_id' => (int)$gunId,
@@ -312,7 +317,7 @@ class jpWargamingReaderWot extends jpWargamingBase
 		$orderBy = ''
 	) {
 		return $this->request->perform('/wot/encyclopedia/vehicleprofiles/', [
-			'tank_id' => $this->toListString($tankId),
+			'tank_id' => (int)$tankId,
 			'fields' => $this->toListString($fields),
 			'order_by' => $orderBy,
 		]);

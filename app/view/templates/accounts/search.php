@@ -1,6 +1,6 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
@@ -12,7 +12,7 @@ if(!isset($data['result'])) {
 	$data['result'] = array();
 }
 
-$language = jpWotLanguage::getInstance();
+$language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
 	<div class="col-lg-12">
@@ -38,7 +38,7 @@ $language = jpWotLanguage::getInstance();
 						</span>
 					</th>
 				</tr>
-			<?php foreach($data['result'] as $searchResult) : ?>
+			<?php foreach($data['result']->data as $searchResult) : ?>
 				<tr>
 					<td><?=++$count?></td>
 					<td><?=$searchResult->nickname?></td>

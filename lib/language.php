@@ -1,14 +1,14 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-class jpWotLanguage
+class jpWseLanguage
 {
 	/**
-	 * @var jpWotLanguage
+	 * @var jpWseLanguage
 	 */
 	private static $_langInstance = null;
 
@@ -18,7 +18,7 @@ class jpWotLanguage
 	private static $_cache = array();
 
 	/**
-	 * @return jpWotLanguage
+	 * @return jpWseLanguage
 	 */
 	public static function getInstance()
 	{

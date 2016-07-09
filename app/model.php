@@ -1,11 +1,11 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-class jpWotModel extends Wot
+class jpWseModel
 {
 	/**
 	 * @var string|array
@@ -23,20 +23,48 @@ class jpWotModel extends Wot
 	protected $_data = array();
 
 	/**
+	 * @var jpWargamingReaderWot|jpWargamingReaderWows
+	 */
+	protected $_gameReader;
+
+	/**
+	 * @var jpWargamingReaderClans
+	 */
+	protected $_clanReader;
+
+	/**
 	 * Initialize the parent World of Tanks web api class with the app's defaults
 	 */
 	public function __construct()
 	{
-		parent::__construct (
-			jpWotConfig::$region,
-			jpWotConfig::$lang,
-			jpWotConfig::$app_id
-		);
+		switch(jpWseConfig::$game)
+		{
+			case 'wot':
+				$this->_gameReader = new jpWargamingReaderWot (
+					jpWseConfig::$app_id,
+					jpWseConfig::$region,
+					jpWseConfig::$lang
+				);
+				break;
+			case 'wows':
+				$this->_gameReader = new jpWargamingReaderWows (
+					jpWseConfig::$app_id,
+					jpWseConfig::$region,
+					jpWseConfig::$lang
+				);
+				break;
+		}
 
-		$this->setCacheType (
-			jpWotConfig::$cache,
-			jpWotConfig::$cacheParams
+		$this->_gameReader->setDecode(true);
+		$this->_gameReader->setAssoc(false);
+
+		$this->_clanReader = new jpWargamingReaderClans (
+			jpWseConfig::$app_id,
+			jpWseConfig::$region,
+			jpWseConfig::$lang
 		);
+		$this->_clanReader->setDecode(true);
+		$this->_clanReader->setAssoc(false);
 	}
 
 	/**
@@ -46,12 +74,6 @@ class jpWotModel extends Wot
 	{
 		$request = array_keys($this->_requestData);
 		$this->_apiCall = reset($request);
-
-		if(isset($this->_requestData['limit'])) {
-			$this->setLimit($this->_requestData['limit']);
-		} else {
-			$this->setLimit(20);
-		}
 	}
 
 	/**

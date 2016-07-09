@@ -1,22 +1,16 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
 $result = $data['result'];
-
-//echo '<pre>';
-//var_dump($result);
-//echo '</pre>';
-
 $clanID = $result['clan_id'];
 $info = $result['info']->$clanID;
 $count = 0;
-
-$language = jpWotLanguage::getInstance();
+$language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
 	<div class="col-lg-12">

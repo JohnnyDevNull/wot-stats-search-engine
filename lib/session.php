@@ -1,11 +1,11 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-abstract class jpWotSession
+abstract class jpWseSession
 {
 	/**
 	 * Starts or continue a session

@@ -4,13 +4,18 @@
  *
  * @see https://eu.wargaming.net/developers/api_reference/
  *
- * @package jpWargamingApiReader
+ * @package jp-wargaming-api-reader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 class jpWargamingReaderWows extends jpWargamingBase
 {
+	/**
+	 * @var string
+	 */
+	protected $api = 'worldofwarships';
+
 	/**
 	 * Request /wows/account/list/<br><br>Method returns partial list of players.
 	 * The list is filtered by initial characters of user name and sorted
@@ -35,11 +40,11 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/account/list/
 	 */
-	public function getAccountList($search, $fields, $type = '', $limit = 100)
+	public function getAccountList($search, $fields = '', $type = '', $limit = 100)
 	{
 		return $this->request->perform('/wows/account/list/', [
 			'search' => $search,
-			'fields' => $this->getFieldsString($fields),
+			'fields' => $this->toListString($fields),
 			'type' => $type,
 			'limit' => $limit,
 		]);

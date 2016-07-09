@@ -4,13 +4,18 @@
  *
  * @see https://eu.wargaming.net/developers/api_reference/
  *
- * @package jpWargamingApiReader
+ * @package jp-wargaming-api-reader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 class jpWargamingReaderClans extends jpWargamingBase
 {
+	/**
+	 * @var string
+	 */
+	protected $api = 'worldoftanks';
+
 	/**
 	 * Request /wgn/clans/list/<br><br>Method searches through clans and sorts
 	 * them by the following logic:<ul><li>the exact match of clan tag is placed

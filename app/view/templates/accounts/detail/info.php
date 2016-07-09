@@ -1,25 +1,20 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-$info = $result['info']->$accountID;
+$info = $result['info']->data->$accountID;
 $statsAll = $info->statistics->all;
-
-//echo '<pre>';
-//var_dump($statsAll);
-//echo '</pre>';
-
 $clan = false;
 
 if(!empty($info->clan)) {
-	$clan = $info->clan->{$info->clan_id};
+	$clan = $info->clan->data->{$info->clan_id};
 }
 
-$language = jpWotLanguage::getInstance();
+$language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
 	<div class="col-lg-4">
@@ -52,7 +47,7 @@ $language = jpWotLanguage::getInstance();
 						<?=$language->get('TEXT_NO_CLAN')?>
 					<?php else : ?>
 						<span class="detail_clan_name"><?=$clan->name?></span>
-						<span class="detail_clan_tag">[<?=$clan->abbreviation?>]</span>
+						<span class="detail_clan_tag">[<?=$clan->tag?>]</span>
 					<?php endif; ?>
 				</td>
 			</tr>

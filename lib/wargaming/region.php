@@ -4,7 +4,7 @@
  *
  * This class is used to set and get request relevant data by region.
  *
- * @package jpWargamingApiReader
+ * @package jp-wargaming-api-reader
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2016, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
@@ -32,37 +32,41 @@ class jpWargamingRegion
 	private $appId;
 
 	/**
+	 * @param string $appId
 	 * @param string $region
+	 * @param string $lang [optional] default: 'en'
+	 * @param string $api [optional] default: 'worldoftanks'
 	 */
-	public function __construct($appId, $region = 'EU')
+	public function __construct($appId, $region = 'EU', $lang = 'en', $api = 'worldoftanks')
 	{
 		$this->setAppId($appId);
+		$this->setLang($lang);
 
 		switch (strtoupper($region)) {
 			case 'EU':
 				$this->region = 'EU';
-				$this->url = 'api.worldoftanks.eu';
+				$this->url = 'api.'.$api.'.eu';
 				break;
 
 			case 'NA':
 				$this->region = 'NA';
-				$this->url = 'api.worldoftanks.com';
+				$this->url = 'api.'.$api.'.com';
 				break;
 
 			case 'ASIA':
 				$this->region = 'ASIA';
-				$this->url = 'api.worldoftanks.asia';
+				$this->url = 'api.'.$api.'.asia';
 				break;
 
 			case 'KR':
 				$this->region = 'KR';
-				$this->url = 'api.worldoftanks.kr';
+				$this->url = 'api.'.$api.'.kr';
 				break;
 
 			case 'RU':
 			default:
 				$this->region = 'RU';
-				$this->url = 'api.worldoftanks.ru';
+				$this->url = 'api.'.$api.'.ru';
 		}
 	}
 

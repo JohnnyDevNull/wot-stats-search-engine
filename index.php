@@ -1,6 +1,6 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
@@ -20,12 +20,13 @@ require_once BPATH.'/inc/function.php';
 require_once BPATH.'/inc/wot.class.php';
 require_once BPATH.'/config.php';
 
-if(jpWotConfig::$debug) {
+if(jpWseConfig::$debug) {
 	error_reporting(E_ALL ^ E_STRICT);
+	ini_set('display_errors', 1);
 }
 
-jpWotSession::start();
-$app = jpWotApp::getInstance();
+jpWseSession::start();
+$app = jpWseApp::getInstance();
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,7 +71,7 @@ $app = jpWotApp::getInstance();
 						&copy; <?=date('Y')?> JPlace <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
 					</span>
 					<div class="pull-right">
-						<?=jpWotTemplate::render('filter.lang')?>
+						<?=jpWseTemplate::render('filter.lang')?>
 					</div>
 				</div>
 			</div>
@@ -78,4 +79,4 @@ $app = jpWotApp::getInstance();
 	</body>
 </html>
 <?php
-jpWotSession::writeClose();
+jpWseSession::writeClose();

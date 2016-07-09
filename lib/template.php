@@ -1,11 +1,11 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-abstract class jpWotTemplate
+abstract class jpWseTemplate
 {
 	/**
 	 * @param string $path
@@ -19,7 +19,7 @@ abstract class jpWotTemplate
 
 		if(is_file($path)) {
 			if(!isset($data['page'])) {
-				$app = jpWotApp::getInstance();
+				$app = jpWseApp::getInstance();
 				$data['page'] = $app->getPageKey();
 			}
 

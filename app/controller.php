@@ -1,11 +1,11 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-class jpWotController
+class jpWseController
 {
 	/**
 	 * @var array
@@ -17,7 +17,7 @@ class jpWotController
 	 */
 	public function index()
 	{
-		$app = jpWotApp::getInstance();
+		$app = jpWseApp::getInstance();
 		$model = null;
 
 		if(!empty($this->_request[$app->getPageKey()])) {
@@ -26,7 +26,7 @@ class jpWotController
 			$model->load();
 		}
 
-		$view = new jpWotView($this, $model);
+		$view = new jpWseView($this, $model);
 		$view->render();
 	}
 
@@ -48,21 +48,5 @@ class jpWotController
 	public function getRequestData()
 	{
 		return $this->_request;
-	}
-
-	/**
-	 * Returns the request specified by the given path.
-	 *
-	 * @param string $key
-	 */
-	public function getRequestDataByK($key)
-	{
-		$ret = array();
-
-		if(isset($this->_request[$key])) {
-			$ret = $this->_request[$key];
-		}
-
-		return $ret;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
@@ -17,7 +17,7 @@ if(!empty($data['accounts']['limit'])) {
 	$limit = $data['accounts']['limit'];
 }
 
-$language = jpWotLanguage::getInstance();
+$language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
 	<div class="col-lg-12">
@@ -28,7 +28,7 @@ $language = jpWotLanguage::getInstance();
 				  method="post">
 				<div class="form-group">
 					<?php
-					jpWotTemplate::render (
+					jpWseTemplate::render (
 						'filter.search',
 						array (
 							'last_value' => $search,
@@ -40,7 +40,7 @@ $language = jpWotLanguage::getInstance();
 				</div>
 				<div class="form-group">
 					<?php
-					jpWotTemplate::render (
+					jpWseTemplate::render (
 						'filter.limit',
 						array (
 							'last_value' => $limit,

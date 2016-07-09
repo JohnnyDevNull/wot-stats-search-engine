@@ -1,25 +1,25 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-class jpWotView
+class jpWseView
 {
 	/**
-	 * @var jpWotController
+	 * @var jpWseController
 	 */
 	protected $_controller;
 
 	/**
-	 * @var jpWotModel
+	 * @var jpWseModel
 	 */
 	protected $_model = null;
 
 	/**
-	 * @param jpWotController $controller
-	 * @param jpWotModel $model [optional] default: null
+	 * @param jpWseController $controller
+	 * @param jpWseModel $model [optional] default: null
 	 */
 	public function __construct($controller, $model = null)
 	{
@@ -32,19 +32,19 @@ class jpWotView
 	 */
 	public function render()
 	{
-		$app = jpWotApp::getInstance();
-		jpWotTemplate::render('main.navigation');
+		$app = jpWseApp::getInstance();
+		jpWseTemplate::render('main.navigation');
 
 		?>
 		<div id="main" role="main">
 			<?php
-			jpWotTemplate::render (
+			jpWseTemplate::render (
 				$app->getPageKey().'.filterarea',
 				$this->_controller->getRequestData($app->getPageKey())
 			);
 
 			if(!empty($this->_model)) {
-				jpWotTemplate::render (
+				jpWseTemplate::render (
 					$app->getPageKey().'.'.$this->_model->getApiCall(),
 					array('result' => $this->_model->getData())
 				);

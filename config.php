@@ -1,11 +1,11 @@
 <?php
 /**
- * @package jpWot
+ * @package jpWse
  * @author Philipp John <info@jplace.de>
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-abstract class jpWotConfig
+abstract class jpWseConfig
 {
 	/**
 	 * @var string
@@ -21,6 +21,13 @@ abstract class jpWotConfig
 	 * @var string
 	 */
 	public static $app_id = '03e3653b14d26e8136d5870a1512e3c4';
+
+	/**
+	 * Possible Keys: 'wot' or 'wows'
+	 *
+	 * @var string
+	 */
+	public static $game = 'wot';
 
 	/**
 	 * @var string
@@ -84,17 +91,12 @@ abstract class jpWotConfig
 		'wiki' => array (
 			'tankinfo' => array (
 				'name',
-				'name_i18n',
 				'nation',
-				'nation_i18n',
 				'tank_id',
 				'type',
-				'type_i18n',
-				'contour_image',
-				'image',
-				'image_small',
-				'level',
-				'short_name_i18n',
+				'tier',
+				'short_name',
+				'images',
 			),
 		),
 		'ratings' => array (
