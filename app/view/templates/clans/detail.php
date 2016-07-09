@@ -8,7 +8,7 @@
 
 $result = $data['result'];
 $clanID = $result['clan_id'];
-$info = $result['info']->$clanID;
+$info = $result['info']->data->{$clanID};
 $count = 0;
 $language = jpWseLanguage::getInstance();
 ?>
@@ -91,11 +91,6 @@ $language = jpWseLanguage::getInstance();
 						</thead>
 						<tbody>
 						<?php foreach($info->members as $member) :
-
-//							echo '<pre>';
-//							var_dump($member);
-//							echo '</pre';
-
 							$leader = $member->account_id == $info->creator_id ? 'style="font-weight: bold; color: navy;"' : '';
 							?>
 							<tr <?=$leader?>>
