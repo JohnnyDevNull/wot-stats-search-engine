@@ -77,6 +77,10 @@ class jpWseApp
 
 		$page = getPostValue('request');
 
+		if(empty($page)) {
+			$page = getGetValue('request');
+		}
+
 		if(!empty($page)) {
 			$controller->setRequestData($page);
 		}

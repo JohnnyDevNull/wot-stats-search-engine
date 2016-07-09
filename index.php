@@ -58,7 +58,7 @@ $app = jpWseApp::getInstance();
 					 alt="World of Tanks Logo"
 					 title="World of Tanks"
 					 style="max-width: 160px; display: inline-block;"/>
-				<h1 style="display: inline-block;">SSE (Stats Search Engine)</h1>
+				<h1 style="display: inline-block;">WG-Games Search Engine</h1>
 			</div>
 			<div class="row" id="contentbox">
 				<div class="col-lg-12">

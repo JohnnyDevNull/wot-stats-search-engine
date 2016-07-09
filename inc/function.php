@@ -33,7 +33,7 @@ function getGetValue($index, $default = '')
 {
 	if(isset($_GET[$index])) {
 		if(is_array($_GET[$index])) {
-			return $_POST[$index];
+			return $_GET[$index];
 		} else {
 			return trim($_GET[$index]);
 		}

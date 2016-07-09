@@ -10,7 +10,7 @@ This is a World of Tanks Player, Clans and Tankopedia Search Engine. It uses Twi
 
 ### Licence
 
-This project ist licenced under the **GNU General Public License in version 3** or later. For more detail see [LICENSE.md](https://github.com/JohnnyDevNull/wot-stats-search-engine/blob/master/LICENSE.md "LICENSE.md")
+This project ist licenced under the **MIT License**. For more detail see [LICENSE.md](https://github.com/JohnnyDevNull/wot-stats-search-engine/blob/master/LICENSE.md "LICENSE.md")
 
 ### Features
 

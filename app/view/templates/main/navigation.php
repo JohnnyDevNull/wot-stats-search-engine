@@ -6,34 +6,40 @@
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-$items = array (
-	'accounts' => array (
-		'LANG_CONSTANT' => 'ACCOUNTS'
-	),
-	'clans' => array (
-		'LANG_CONSTANT' => 'CLANS'
-	),
-	'ratings' => array (
-		'LANG_CONSTANT' => 'RATINGS'
-	),
-	'clanratings' => array (
-		'LANG_CONSTANT' => 'CLANRATINGS'
-	),
-);
+$items = jpWseConfig::$menuItems;
 
 $app = jpWseApp::getInstance();
-$activePageKey = $app->getPageKey();
 $language = jpWseLanguage::getInstance();
+$activeLink = 'index.php?'.$_SERVER['QUERY_STRING'];
 ?>
 <div class="row">
 	<div class="col-lg-12">
 		<nav>
 			<ul class="nav nav-tabs" role="tablist">
-				<?php foreach($items as $pageKey => $item) : ?>
-				<li <?=$activePageKey == $pageKey ? 'class="active"' : ''?>>
-					<a href="index.php?page=<?=$pageKey?>"
-					   title="<?=$language->get('MENU_ITEM_'.$item['LANG_CONSTANT'].'_TITLE')?>">
-						<?=$language->get('MENU_ITEM_'.$item['LANG_CONSTANT'].'_TEXT')?>
+				<?php foreach($items as $index => $item) :
+					if(isset($item['hide']) && (bool)$item['hide']) {
+						continue;
+					}
+
+					if(isset($item['static_name'])) {
+						$title = $text = $item['static_name'];
+					} else {
+						$title = $language->get('MENU_ITEM_'.$item['lang_constant'].'_TITLE');
+						$text = $language->get('MENU_ITEM_'.$item['lang_constant'].'_TEXT');
+					}
+
+					$query = '';
+
+					if(isset($item['params'])) {
+						$query = '&'.http_build_query($item['params']);
+					}
+
+					$link = 'index.php?page='.$item['page'].$query;
+					?>
+				<li id="item_<?=(int)$index?>" <?=$activeLink == $link ? 'class="active"' : ''?>>
+					<a href="<?=$link?>"
+					   title="<?=$title?>">
+						<?=$text?>
 					</a>
 				</li>
 				<?php endforeach; ?>

@@ -40,7 +40,7 @@ class jpWseView
 			<?php
 			jpWseTemplate::render (
 				$app->getPageKey().'.filterarea',
-				$this->_controller->getRequestData($app->getPageKey())
+				$this->_controller->getRequestData()
 			);
 
 			if(!empty($this->_model)) {

@@ -8,6 +8,11 @@
 abstract class jpWseConfig
 {
 	/**
+	 * @var bool
+	 */
+	public static $debug = false;
+
+	/**
 	 * @var string
 	 */
 	public static $region = 'EU';
@@ -122,8 +127,35 @@ abstract class jpWseConfig
 		)
 	);
 
-	/**
-	 * @var bool
-	 */
-	public static $debug = false;
+	public static $menuItems = [
+		0 => [
+			'page' => 'accounts',
+			'lang_constant' => 'ACCOUNTS'
+		],
+		1 => [
+			'page' => 'clans',
+			'lang_constant' => 'CLANS'
+		],
+		2 => [
+			'page' => 'ratings',
+			'lang_constant' => 'RATINGS',
+			'hide' => 1,
+		],
+		3 => [
+			'page' => 'clanratings',
+			'lang_constant' => 'CLANRATINGS',
+			'hide' => 1,
+		],
+		4 => [
+			'page' => 'clans',
+			'static_name' => 'Spitze Voraus',
+			'params' => [
+				'request' => [
+					'clans' => [
+						'detail' => 500075945
+					]
+				],
+			],
+		]
+	];
 }
