@@ -1,3 +1,7 @@
+# Attention
+
+This project is going to rebuild afterwards the new [jp-wargaming-api-reader](https://github.com/JohnnyDevNull/jp-wargaming-api-reader) is finished. Then this project will become a more global scope of the Wargaming.NET games. That means, that a game switcher will be implemented.
+
 # Project World of Tanks Statistics Engine
 
 ### Description
