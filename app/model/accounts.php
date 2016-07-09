@@ -42,6 +42,9 @@ class jpWseModelAccounts extends jpWseModel
 				}
 
 				$this->_data['vehicles'] = $this->_gameReader->getAccountVehicles($accountID);
+				$this->_data['vehicles']->data->{$accountID} =  array_slice (
+					$this->_data['vehicles']->data->{$accountID}, 0, 50
+				);
 
 				$nationsModel = $app->getModelInstance('info');
 				$nationsModel->load();
@@ -66,11 +69,11 @@ class jpWseModelAccounts extends jpWseModel
 	{
 		$accountID = $this->_data['account_id'];
 
-		if(empty($this->_data['vehicles']->data->$accountID)) {
+		if(empty($this->_data['vehicles']->data->{$accountID})) {
 			return;
 		}
 
-		$vehicles = $this->_data['vehicles']->data->$accountID;
+		$vehicles = $this->_data['vehicles']->data->{$accountID};
 		$this->_data['tankinfo'] = array();
 		$tankIdArray = array();
 

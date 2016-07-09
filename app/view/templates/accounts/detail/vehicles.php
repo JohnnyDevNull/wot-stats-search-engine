@@ -43,10 +43,14 @@ $language = jpWseLanguage::getInstance();
 		<h4><?=$language->get('STATS_VEHICLE_VEHICLES_HEADLINE')?></h4>
 		<div class="vehicles-scrollbox">
 			<table class="table">
-				<?php foreach($vehicles as $vehicle) :
+				<?php
+				$vi = 1;
+
+				foreach($vehicles as $vehicle) :
 					$vehicleInfo = $tankInfo->{$vehicle->tank_id};
 					?>
 					<tr>
+						<td><?=$vi?></td>
 						<td>
 							<div class="vehicle-wrapper">
 								<span class="level"><?=  romanic_number((int)$vehicleInfo->level)?></span>
@@ -92,7 +96,9 @@ $language = jpWseLanguage::getInstance();
 							<?php endif; ?>
 						</td>
 					</tr>
-				<?php endforeach; ?>
+					<?php
+					$vi++;
+				endforeach; ?>
 			</table>
 		</div>
 	</div>
