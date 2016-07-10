@@ -12,8 +12,8 @@ class jpWseModelInfo extends jpWseModel
 	 */
 	public function load()
 	{
-		$this->initReader($this->_requestData['game']);
-		$this->_data = $this->_gameReader->getEncyclopediaInfo ([
+		$this->initReader($this->requestData['game']);
+		$this->data = $this->gameReader->getEncyclopediaInfo ([
 			'game_version',
 			'vehicle_nations',
 			'vehicle_types'

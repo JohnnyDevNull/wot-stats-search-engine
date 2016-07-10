@@ -6,7 +6,6 @@
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-$info = $result['info']->data->$accountID;
 $statsAll = $info->statistics->all;
 $clan = false;
 

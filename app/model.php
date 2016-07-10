@@ -10,41 +10,41 @@ class jpWseModel
 	/**
 	 * @var string|array
 	 */
-	protected $_requestData = '';
+	protected $requestData = '';
 
 	/**
 	 * @var string
 	 */
-	protected $_apiCall = '';
+	protected $apiCall = '';
 
 	/**
 	 * @var array
 	 */
-	protected $_data = array();
+	protected $data = array();
 
 	/**
 	 * @var jpWargamingReaderWot|jpWargamingReaderWows
 	 */
-	protected $_gameReader;
+	protected $gameReader;
 
 	/**
 	 * @var jpWargamingReaderClans
 	 */
-	protected $_clanReader;
+	protected $clanReader;
 
 	/**
 	 * Invokes the model loading.
 	 */
 	public function load()
 	{
-		$request = array_keys($this->_requestData);
-		$this->_apiCall = reset($request);
+		$request = array_keys($this->requestData);
+		$this->apiCall = reset($request);
 
-		if(!isset($this->_requestData['game'])) {
+		if(!isset($this->requestData['game'])) {
 			throw new LogicException('game index is missing in request data');
 		}
 
-		$this->initReader($this->_requestData['game']);
+		$this->initReader($this->requestData['game']);
 	}
 
 	/**
@@ -52,7 +52,7 @@ class jpWseModel
 	 */
 	public function setRequestData($value)
 	{
-		$this->_requestData = $value;
+		$this->requestData = $value;
 	}
 
 	/**
@@ -60,7 +60,7 @@ class jpWseModel
 	 */
 	public function getRequestData()
 	{
-		return $this->_requestData;
+		return $this->requestData;
 	}
 
 	/**
@@ -68,7 +68,7 @@ class jpWseModel
 	 */
 	public function getData()
 	{
-		return $this->_data;
+		return $this->data;
 	}
 
 	/**
@@ -76,25 +76,27 @@ class jpWseModel
 	 */
 	public function getApiCall()
 	{
-		return $this->_apiCall;
+		return $this->apiCall;
 	}
 
 	/**
 	 * Initializes the game and clan reader
+	 *
+	 * @param string $game
 	 */
 	protected function initReader($game)
 	{
 		switch($game)
 		{
 			case 'wot':
-				$this->_gameReader = new jpWargamingReaderWot (
+				$this->gameReader = new jpWargamingReaderWot (
 					jpWseConfig::$app_id,
 					jpWseConfig::$region,
 					jpWseConfig::$lang
 				);
 				break;
 			case 'wows':
-				$this->_gameReader = new jpWargamingReaderWows (
+				$this->gameReader = new jpWargamingReaderWows (
 					jpWseConfig::$app_id,
 					jpWseConfig::$region,
 					jpWseConfig::$lang
@@ -102,15 +104,15 @@ class jpWseModel
 				break;
 		}
 
-		$this->_gameReader->setDecode(true);
-		$this->_gameReader->setAssoc(false);
+		$this->gameReader->setDecode(true);
+		$this->gameReader->setAssoc(false);
 
-		$this->_clanReader = new jpWargamingReaderClans (
+		$this->clanReader = new jpWargamingReaderClans (
 			jpWseConfig::$app_id,
 			jpWseConfig::$region,
 			jpWseConfig::$lang
 		);
-		$this->_clanReader->setDecode(true);
-		$this->_clanReader->setAssoc(false);
+		$this->clanReader->setDecode(true);
+		$this->clanReader->setAssoc(false);
 	}
 }

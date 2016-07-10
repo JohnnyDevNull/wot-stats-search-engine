@@ -10,23 +10,23 @@ class jpWseLanguage
 	/**
 	 * @var jpWseLanguage
 	 */
-	private static $_langInstance = null;
+	private static $langInstance = null;
 
 	/**
 	 * @var array
 	 */
-	private static $_cache = array();
+	private static $cache = array();
 
 	/**
 	 * @return jpWseLanguage
 	 */
 	public static function getInstance()
 	{
-		if(self::$_langInstance === null) {
-			self::$_langInstance = new self();
+		if(self::$langInstance === null) {
+			self::$langInstance = new self();
 		}
 
-		return self::$_langInstance;
+		return self::$langInstance;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class jpWseLanguage
 			return false;
 		}
 
-		self::$_cache = array_merge(self::$_cache, $langArray);
+		self::$cache = array_merge(self::$cache, $langArray);
 	}
 
 	/**
@@ -61,8 +61,8 @@ class jpWseLanguage
 	{
 		$ret = $default;
 
-		if(isset(self::$_cache[(string)$const])) {
-			$ret = self::$_cache[(string)$const];
+		if(isset(self::$cache[(string)$const])) {
+			$ret = self::$cache[(string)$const];
 		}
 
 		return $ret;
@@ -73,6 +73,6 @@ class jpWseLanguage
 	 */
 	public function getCache()
 	{
-		return self::$_cache;
+		return self::$cache;
 	}
 }

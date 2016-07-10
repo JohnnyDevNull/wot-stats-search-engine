@@ -6,15 +6,28 @@
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-$result = $data['result'];
-$accountID = $result['account_id'];
+$info = null;
+$vehicles = null;
+$tankInfo = null;
+$accountID = 0;
+
+if(!empty($data['result'])) {
+	$result = $data['result'];
+	$accountID = $result['account_id'];
+
+	$info = $result['info']->data->{$accountID};
+	$vehicles = $result['vehicles']->data->{$accountID};
+	$tankInfo = $result['tankinfo']->data;
+}
+
+$game = $data['request'][$data['page']]['game'];
 ?>
 <div class="row">
 	<div class="col-lg-12">
 		<div id="info">
 			<?php
-			if(isset($result['info']->data->$accountID)) {
-				include __DIR__.'/detail/info.php';
+			if(!empty($info)) {
+				include __DIR__.'/detail/'.$game.'.info.php';
 			}
 			?>
 		</div>
@@ -24,8 +37,8 @@ $accountID = $result['account_id'];
 	<div class="col-lg-12">
 		<div id="vehicles">
 			<?php
-			if(isset($result['vehicles']->data->$accountID, $result['tankinfo'])) {
-				include __DIR__.'/detail/vehicles.php';
+			if(!empty($vehicles) && !empty($tankInfo)) {
+				include __DIR__.'/detail/'.$game.'.vehicles.php';
 			}
 			?>
 		</div>

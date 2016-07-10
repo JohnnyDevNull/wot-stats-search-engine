@@ -10,7 +10,7 @@ class jpWseApp
 	/**
 	 * @var jpWseApp
 	 */
-	static private $_appInstance = null;
+	static private $appInstance = null;
 
 	/**
 	 * @var string
@@ -43,8 +43,8 @@ class jpWseApp
 	 */
 	public function invoke()
 	{
-		$this->page = getGetValue('page', 'accounts');
-		$this->subPage = getGetValue('sub');
+		$this->page = strip_tags(getGetValue('page', 'accounts'));
+		$this->subPage = strip_tags(getGetValue('sub'));
 
 		$sessionLang = jpWseSession::get('active_language');
 
@@ -84,6 +84,10 @@ class jpWseApp
 		if(!empty($request)) {
 			if(empty($request[$this->page]['game'])) {
 				$request[$this->page]['game'] = jpWseConfig::$game;
+			} else {
+				$request[$this->page]['game'] = strip_tags (
+					$request[$this->page]['game']
+				);
 			}
 
 			$controller->setRequestData($request);
@@ -97,11 +101,11 @@ class jpWseApp
 	 */
 	public static function getInstance()
 	{
-		if(self::$_appInstance === null) {
-			self::$_appInstance = new self();
+		if(self::$appInstance === null) {
+			self::$appInstance = new self();
 		}
 
-		return self::$_appInstance;
+		return self::$appInstance;
 	}
 
 	/**
@@ -144,7 +148,7 @@ class jpWseApp
 	 */
 	public function getModelInstance($key)
 	{
-		$class = 'jpWseModel'.ucfirst(strtolower($key));
+		$class = 'jpWseModel'.ucfirst($key);
 
 		if(class_exists($class)) {
 			$model = new $class;

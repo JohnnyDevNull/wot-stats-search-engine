@@ -6,9 +6,7 @@
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-$vehicles = $result['vehicles']->data->{$accountID};
 $vehicleTypes = $result['vehicle_types'];
-$tankInfo = $result['tankinfo']->data;
 $nations = $result['nations'];
 $language = jpWseLanguage::getInstance();
 ?>

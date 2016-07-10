@@ -14,28 +14,28 @@ class jpWseModelClans extends jpWseModel
 	{
 		parent::load();
 
-		switch($this->_apiCall) {
+		switch($this->apiCall) {
 			case 'search':
-				$this->_data = $this->_clanReader->getClansList (
-					$this->_requestData[$this->_apiCall],
+				$this->data = $this->clanReader->getClansList (
+					$this->requestData[$this->apiCall],
 					jpWseConfig::$wotApiFields['clans']['search'],
-					$this->_requestData['limit']
+					$this->requestData['limit']
 				);
 				break;
 
 			case 'detail':
-				$this->_data['clan_id'] = $this->_requestData[$this->_apiCall];
+				$this->data['clan_id'] = $this->requestData[$this->apiCall];
 
-				$this->_data['info'] = $this->_clanReader->getClansInfo (
-					$this->_data['clan_id'],
+				$this->data['info'] = $this->clanReader->getClansInfo (
+					$this->data['clan_id'],
 					jpWseConfig::$wotApiFields['clans']['detail']
 				);
 
 				break;
 
 			default:
-				$this->_data['error'] = 1;
-				$this->_data['error_msg'] = 'Unknown Request invoked. "'.$this->_apiCall.'"';
+				$this->data['error'] = 1;
+				$this->data['error_msg'] = 'Unknown Request invoked. "'.$this->apiCall.'"';
 		}
 	}
 }
