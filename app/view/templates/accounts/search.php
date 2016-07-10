@@ -12,6 +12,7 @@ if(!isset($data['result'])) {
 	$data['result'] = array();
 }
 
+$game = $data['request']['accounts']['game'];
 $language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
@@ -19,6 +20,7 @@ $language = jpWseLanguage::getInstance();
 		<form role="form"
 			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
+			<input type="hidden" name="game" value="<?=$game?>" />
 			<table class="table table-striped no_succession">
 				<colgroup>
 					<col style="width: 60px;" />

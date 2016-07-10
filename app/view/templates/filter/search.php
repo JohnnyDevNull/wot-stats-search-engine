@@ -35,4 +35,5 @@ if(!isset($data['placeholder'])) {
 	   name="request[<?=$data['page']?>][search]"
 	   placeholder="<?=$data['placeholder']?>"
 	   id="<?=$data['id']?>"
-	   value="<?=$data['last_value']?>">
+	   value="<?=$data['last_value']?>"
+	   required>

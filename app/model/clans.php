@@ -18,7 +18,8 @@ class jpWseModelClans extends jpWseModel
 			case 'search':
 				$this->_data = $this->_clanReader->getClansList (
 					$this->_requestData[$this->_apiCall],
-					jpWseConfig::$wotApiFields['clans']['search']
+					jpWseConfig::$wotApiFields['clans']['search'],
+					$this->_requestData['limit']
 				);
 				break;
 

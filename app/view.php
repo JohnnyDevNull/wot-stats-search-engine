@@ -10,12 +10,12 @@ class jpWseView
 	/**
 	 * @var jpWseController
 	 */
-	protected $_controller;
+	protected $controller;
 
 	/**
 	 * @var jpWseModel
 	 */
-	protected $_model = null;
+	protected $model = null;
 
 	/**
 	 * @param jpWseController $controller
@@ -23,8 +23,8 @@ class jpWseView
 	 */
 	public function __construct($controller, $model = null)
 	{
-		$this->_controller = $controller;
-		$this->_model = $model;
+		$this->controller = $controller;
+		$this->model = $model;
 	}
 
 	/**
@@ -40,13 +40,16 @@ class jpWseView
 			<?php
 			jpWseTemplate::render (
 				$app->getPageKey().'.filterarea',
-				$this->_controller->getRequestData()
+				$this->controller->getRequestData()
 			);
 
-			if(!empty($this->_model)) {
+			if(!empty($this->model)) {
 				jpWseTemplate::render (
-					$app->getPageKey().'.'.$this->_model->getApiCall(),
-					array('result' => $this->_model->getData())
+					$app->getPageKey().'.'.$this->model->getApiCall(),
+					[
+						'result' => $this->model->getData(),
+						'request' => $this->controller->getRequestData()
+					]
 				);
 			}
 			?>

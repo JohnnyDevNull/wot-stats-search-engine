@@ -48,9 +48,11 @@ class jpWseModelAccounts extends jpWseModel
 					$this->_data['vehicles']->data->{$accountID}, 0, 50
 				);
 
-				$nationsModel = $app->getModelInstance('info');
-				$nationsModel->load();
-				$info =  $nationsModel->getData();
+				$infoModel = $app->getModelInstance('info');
+				$infoModel->setRequestData($this->_requestData);
+				$infoModel->load();
+
+				$info =  $infoModel->getData();
 				$this->_data['info_vehicle_nations'] = $info->data->vehicle_nations;
 				$this->_data['info_vehicle_types'] = $info->data->vehicle_types;
 

@@ -53,7 +53,7 @@ $language = jpWseLanguage::getInstance();
 						<td><?=$vi?></td>
 						<td>
 							<div class="vehicle-wrapper">
-								<span class="level"><?=  romanic_number((int)$vehicleInfo->level)?></span>
+								<span class="level"><?=romanic_number((int)$vehicleInfo->tier)?></span>
 								<img src="<?=$vehicleInfo->images->small_icon?>"
 									 alt="<?=$vehicleInfo->short_name?>" />
 							</div>

@@ -15,19 +15,19 @@ class jpWseApp
 	/**
 	 * @var string
 	 */
-	protected $_pageKey = '';
+	protected $page = '';
 
 	/**
 	 * @var string
 	 */
-	protected $_subKey = '';
+	protected $subPage = '';
 
 	/**
 	 * @return string
 	 */
 	public function getPageKey()
 	{
-		return $this->_pageKey;
+		return $this->page;
 	}
 
 	/**
@@ -35,7 +35,7 @@ class jpWseApp
 	 */
 	public function getSubKey()
 	{
-		return $this->_subKey;
+		return $this->subPage;
 	}
 
 	/**
@@ -43,8 +43,8 @@ class jpWseApp
 	 */
 	public function invoke()
 	{
-		$this->_pageKey = getGetValue('page', 'accounts');
-		$this->_subKey = getGetValue('sub');
+		$this->page = getGetValue('page', 'accounts');
+		$this->subPage = getGetValue('sub');
 
 		$sessionLang = jpWseSession::get('active_language');
 
@@ -71,7 +71,7 @@ class jpWseApp
 		$language = jpWseLanguage::getInstance();
 		$language->load('main', BPATH, $langKey);
 		$language->load('filter', BPATH, $langKey);
-		$language->load($this->_pageKey, BPATH, $langKey);
+		$language->load($this->page, BPATH, $langKey);
 
 		$controller = $this->getControllerInstance();
 
@@ -82,6 +82,10 @@ class jpWseApp
 		}
 
 		if(!empty($request)) {
+			if(empty($request[$this->page]['game'])) {
+				$request[$this->page]['game'] = jpWseConfig::$game;
+			}
+
 			$controller->setRequestData($request);
 		}
 

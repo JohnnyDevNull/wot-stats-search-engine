@@ -41,7 +41,7 @@ class jpWseModel
 		$this->_apiCall = reset($request);
 
 		if(!isset($this->_requestData['game'])) {
-			$this->_requestData['game'] = jpWseConfig::$game;
+			throw new LogicException('game index is missing in request data');
 		}
 
 		$this->initReader($this->_requestData['game']);

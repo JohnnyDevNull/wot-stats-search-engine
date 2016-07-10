@@ -9,17 +9,18 @@
 $search = '';
 $limit = 20;
 $game = jpWseConfig::$game;
+$page = $data['page'];
 
-if(!empty($data['accounts']['search'])) {
-	$search = $data['accounts']['search'];
+if(!empty($data[$page]['search'])) {
+	$search = $data[$page]['search'];
 }
 
-if(!empty($data['accounts']['limit'])) {
-	$limit = $data['accounts']['limit'];
+if(!empty($data[$page]['limit'])) {
+	$limit = $data[$page]['limit'];
 }
 
-if(!empty($data['accounts']['game'])) {
-	$game = $data['accounts']['game'];
+if(!empty($data[$page]['game'])) {
+	$game = $data[$page]['game'];
 }
 
 $language = jpWseLanguage::getInstance();
