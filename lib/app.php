@@ -75,14 +75,14 @@ class jpWseApp
 
 		$controller = $this->getControllerInstance();
 
-		$page = getPostValue('request');
+		$request = getPostValue('request');
 
-		if(empty($page)) {
-			$page = getGetValue('request');
+		if(empty($request)) {
+			$request = getGetValue('request');
 		}
 
-		if(!empty($page)) {
-			$controller->setRequestData($page);
+		if(!empty($request)) {
+			$controller->setRequestData($request);
 		}
 
 		$controller->index();

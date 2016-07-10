@@ -40,6 +40,10 @@ class jpWseModel
 		$request = array_keys($this->_requestData);
 		$this->_apiCall = reset($request);
 
+		if(!isset($this->_requestData['game'])) {
+			$this->_requestData['game'] = jpWseConfig::$game;
+		}
+
 		$this->initReader($this->_requestData['game']);
 	}
 
