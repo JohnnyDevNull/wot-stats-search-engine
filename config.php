@@ -47,24 +47,46 @@ abstract class jpWseConfig
 		'port' => null
 	);
 
-	public static $wotApiFields = array (
-		'accounts' => array (
-			'search' => array (
-				'account_id',
-				'nickname',
+	public static $apiFields = array (
+		'wot' => array(
+			'accounts' => array (
+				'search' => array (
+					'account_id',
+					'nickname',
+				),
+				'detail' => array (
+					'account_id',
+					'clan_id',
+					'created_at',
+					'global_rating',
+					'last_battle_time',
+					'nickname',
+					'updated_at',
+					'statistics.frags',
+					'statistics.trees_cut',
+					'client_language',
+					'statistics.all',
+				),
 			),
-			'detail' => array (
-				'account_id',
-				'clan_id',
-				'created_at',
-				'global_rating',
-				'last_battle_time',
-				'nickname',
-				'updated_at',
-				'statistics.frags',
-				'statistics.trees_cut',
-				'client_language',
-				'statistics.all',
+		),
+		'wows' => array(
+			'accounts' => array (
+				'search' => array (
+					'account_id',
+					'nickname',
+				),
+				'detail' => array (
+					'account_id',
+					'created_at',
+					'hidden_profile',
+					'global_rating',
+					'last_battle_time',
+					'leveling_points',
+					'leveling_tier',
+					'nickname',
+					'updated_at',
+					'statistics',
+				),
 			),
 		),
 		'clans' => array (

@@ -20,13 +20,13 @@ class jpWseModelAccountsDetailWot extends jpWseModel
 
 		$this->data['info'] = $this->gameReader->getAccountInfo (
 			$accountID,
-			jpWseConfig::$wotApiFields['accounts']['detail']
+			jpWseConfig::$apiFields['wot']['accounts']['detail']
 		);
 
-		$clanID = $this->data['info']->data->$accountID->clan_id;
+		$clanID = $this->data['info']->data->{$accountID}->clan_id;
 
 		if(!empty($clanID)) {
-			$this->data['info']->data->$accountID->clan = $this->clanReader->getClansInfo (
+			$this->data['info']->data->{$accountID}->clan = $this->clanReader->getClansInfo (
 				$clanID,
 				array('name', 'tag')
 			);
@@ -77,7 +77,7 @@ class jpWseModelAccountsDetailWot extends jpWseModel
 
 		$this->data['tankinfo'] = $this->gameReader->getEncyclopediaVehicles (
 			implode(',', $tankIdArray),
-			jpWseConfig::$wotApiFields['wiki']['tankinfo']
+			jpWseConfig::$apiFields['wiki']['tankinfo']
 		);
 
 		foreach($this->data['tankinfo']->data as $tankInfo) {
