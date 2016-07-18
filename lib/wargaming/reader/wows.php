@@ -140,10 +140,10 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/ships/
 	 */
-	public function getEncyclopediaVehicles($shipId = 0, $fields = '',
+	public function getEncyclopediaShips($shipId = 0, $fields = '',
 		$nation = '', $type = ''
 	) {
-		return $this->request->perform('/wot/encyclopedia/ships/', [
+		return $this->request->perform('/wows/encyclopedia/ships/', [
 			'ship_id' => $this->toListString($shipId),
 			'fields' => $this->toListString($fields),
 			'nation' => $this->toListString($nation),

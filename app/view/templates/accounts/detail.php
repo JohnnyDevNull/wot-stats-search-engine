@@ -9,6 +9,7 @@
 $info = null;
 $vehicles = null;
 $tankInfo = null;
+$warships = null;
 $accountID = 0;
 
 if(!empty($data['result'])) {
@@ -16,8 +17,22 @@ if(!empty($data['result'])) {
 	$accountID = $result['account_id'];
 
 	$info = $result['info']->data->{$accountID};
-	$vehicles = $result['vehicles']->data->{$accountID};
-	$tankInfo = $result['tankinfo']->data;
+
+	if(!empty($result['vehicles'])) {
+		$vehicles = $result['vehicles']->data->{$accountID};
+	}
+
+	if(!empty($result['tankinfo'])) {
+		$tankInfo = $result['tankinfo']->data;
+	}
+
+	if(!empty($result['warships'])) {
+		$warships = $result['warships']->data->{$accountID};
+	}
+
+	if(!empty($result['shipinfo'])) {
+		$shipInfo = $result['shipinfo']->data;
+	}
 }
 
 $game = $data['request'][$data['page']]['game'];
@@ -37,8 +52,18 @@ $game = $data['request'][$data['page']]['game'];
 	<div class="col-lg-12">
 		<div id="vehicles">
 			<?php
-			if(!empty($vehicles) && !empty($tankInfo)) {
-				include __DIR__.'/detail/'.$game.'.vehicles.php';
+			if (
+				$game == 'wot'
+				&& !empty($vehicles)
+				&& !empty($tankInfo)
+			) {
+				include __DIR__.'/detail/wot.vehicles.php';
+			} else if (
+				$game = 'wows'
+				&& !empty($warships)
+				&& !empty($shipInfo)
+			) {
+				include __DIR__.'/detail/wows.ships.php';
 			}
 			?>
 		</div>

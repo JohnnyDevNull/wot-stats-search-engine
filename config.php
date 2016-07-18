@@ -42,19 +42,22 @@ abstract class jpWseConfig
 	/**
 	 * @var array
 	 */
-	public static $cacheParams = array (
+	public static $cacheParams = [
 		'host' => null,
-		'port' => null
-	);
+		'port' => null,
+	];
 
-	public static $apiFields = array (
-		'wot' => array(
-			'accounts' => array (
-				'search' => array (
+	/**
+	 * @var string[]
+	 */
+	public static $apiFields = [
+		'wot' => [
+			'accounts' => [
+				'search' => [
 					'account_id',
 					'nickname',
-				),
-				'detail' => array (
+				],
+				'detail' => [
 					'account_id',
 					'clan_id',
 					'created_at',
@@ -66,39 +69,39 @@ abstract class jpWseConfig
 					'statistics.trees_cut',
 					'client_language',
 					'statistics.all',
-				),
-			),
-		),
-		'wows' => array(
-			'accounts' => array (
-				'search' => array (
+				],
+			],
+		],
+		'wows' => [
+			'accounts' => [
+				'search' => [
 					'account_id',
 					'nickname',
-				),
-				'detail' => array (
+				],
+				'detail' => [
 					'account_id',
+					'hidden_profile',
 					'created_at',
 					'hidden_profile',
-					'global_rating',
 					'last_battle_time',
 					'leveling_points',
 					'leveling_tier',
 					'nickname',
 					'updated_at',
 					'statistics',
-				),
-			),
-		),
-		'clans' => array (
-			'search' => array (
+				],
+			],
+		],
+		'clans' => [
+			'search' => [
 				'clan_id',
 				'color',
 				'created_at',
 				'members_count',
 				'name',
 				'tag',
-			),
-			'detail' => array (
+			],
+			'detail' => [
 				'tag',
 				'clan_id',
 				'color',
@@ -113,10 +116,10 @@ abstract class jpWseConfig
 				'creator_name',
 				'updated_at',
 				'members',
-			),
-		),
-		'wiki' => array (
-			'tankinfo' => array (
+			],
+		],
+		'wiki' => [
+			'tankinfo' => [
 				'name',
 				'nation',
 				'tank_id',
@@ -124,10 +127,19 @@ abstract class jpWseConfig
 				'tier',
 				'short_name',
 				'images',
-			),
-		),
-		'ratings' => array (
-			'accounts' => array (
+			],
+			'shipinfo' => [
+				'name',
+				'nation',
+				'ship_id',
+				'ship_id_str',
+				'type',
+				'tier',
+				'images',
+			],
+		],
+		'ratings' => [
+			'accounts' => [
 				'account_id',
 				'battles_to_play',
 				'battles_count',
@@ -144,19 +156,22 @@ abstract class jpWseConfig
 				'wins_ratio',
 				'xp_amount',
 				'xp_avg',
-				'xp_max'
-			),
-		)
-	);
+				'xp_max',
+			],
+		],
+	];
 
+	/**
+	 * @var string[]
+	 */
 	public static $menuItems = [
 		0 => [
 			'page' => 'accounts',
-			'lang_constant' => 'ACCOUNTS'
+			'lang_constant' => 'ACCOUNTS',
 		],
 		1 => [
 			'page' => 'clans',
-			'lang_constant' => 'CLANS'
+			'lang_constant' => 'CLANS',
 		],
 		2 => [
 			'page' => 'ratings',
@@ -174,10 +189,10 @@ abstract class jpWseConfig
 			'params' => [
 				'request' => [
 					'clans' => [
-						'detail' => 500075945
-					]
+						'detail' => 500075945,
+					],
 				],
 			],
-		]
+		],
 	];
 }
