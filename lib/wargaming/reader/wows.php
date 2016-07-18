@@ -398,6 +398,7 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * each ship of a player. Accounts with hidden game profiles are excluded
 	 * from response. Hidden profiles are listed in the field meta.hidden.
 	 *
+	 * @param int $accountId
 	 * @param string|string[] $fields [optional] Response field. The fields are
 	 * separated with commas. Embedded fields are separated with dots.<br>To
 	 * exclude a field, use “-” in front of its name. In case the parameter is
@@ -407,9 +408,10 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/battletypes/
 	 */
-	public function getShipsStats($fields = '', $seasonId = 0)
+	public function getShipsStats($accountId, $fields = '', $seasonId = 0)
 	{
 		return $this->request->perform('/wows/ships/stats/', [
+			'account_id' => $accountId,
 			'fields' => $this->toListString($fields),
 			'season_id' => $seasonId,
 		]);

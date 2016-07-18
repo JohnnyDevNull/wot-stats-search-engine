@@ -28,7 +28,7 @@ class jpWseModelAccountsDetailWot extends jpWseModel
 		if(!empty($clanID)) {
 			$this->data['info']->data->{$accountID}->clan = $this->clanReader->getClansInfo (
 				$clanID,
-				array('name', 'tag')
+				['name', 'tag']
 			);
 		}
 
@@ -37,7 +37,7 @@ class jpWseModelAccountsDetailWot extends jpWseModel
 			$this->data['vehicles']->data->{$accountID}, 0, 50
 		);
 
-		$infoModel = $app->getModelInstance('info');
+		$infoModel = $app->getModelInstance('InfoWot');
 		$infoModel->setRequestData($this->requestData);
 		$infoModel->load();
 
@@ -60,8 +60,8 @@ class jpWseModelAccountsDetailWot extends jpWseModel
 		}
 
 		$vehicles = $this->data['vehicles']->data->{$accountID};
-		$this->data['tankinfo'] = array();
-		$tankIdArray = array();
+		$this->data['tankinfo'] = [];
+		$tankIdArray = [];
 
 		foreach($vehicles as $vehicle) {
 			/*
@@ -82,19 +82,19 @@ class jpWseModelAccountsDetailWot extends jpWseModel
 
 		foreach($this->data['tankinfo']->data as $tankInfo) {
 			if(!isset($this->data['vehicle_types'][$tankInfo->type])) {
-				$this->data['vehicle_types'][$tankInfo->type] = array(
+				$this->data['vehicle_types'][$tankInfo->type] = [
 					'type_i18n' => $this->data['info_vehicle_types']->{$tankInfo->type},
 					'wins' => 0,
 					'battles' => 0,
-				);
+				];
 			}
 
 			if(!isset($this->data['nations'][$tankInfo->nation])) {
-				$this->data['nations'][$tankInfo->nation] = array(
+				$this->data['nations'][$tankInfo->nation] = [
 					'nation_i18n' => $this->data['info_vehicle_nations']->{$tankInfo->nation},
 					'wins' => 0,
 					'battles' => 0,
-				);
+				];
 			}
 		}
 

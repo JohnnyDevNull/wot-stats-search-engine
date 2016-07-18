@@ -83,11 +83,11 @@ class jpWseApp
 
 		if(!empty($request)) {
 			if(empty($request[$this->page]['game'])) {
-				$request[$this->page]['game'] = jpWseConfig::$game;
-			} else {
-				$request[$this->page]['game'] = strip_tags (
-					$request[$this->page]['game']
-				);
+				$request[$this->page]['game'] = getPostValue('game');
+
+				if(empty($request[$this->page]['game'])) {
+					$request[$this->page]['game'] = jpWseConfig::$game;
+				}
 			}
 
 			$controller->setRequestData($request);

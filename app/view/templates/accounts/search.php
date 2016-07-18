@@ -9,7 +9,7 @@
 $count = 0;
 
 if(!isset($data['result'])) {
-	$data['result'] = array();
+	$data['result'] = [];
 }
 
 $game = $data['request']['accounts']['game'];
