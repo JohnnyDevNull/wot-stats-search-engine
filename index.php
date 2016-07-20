@@ -17,7 +17,6 @@ define('BPATH', __DIR__);
 
 require_once BPATH.'/inc/autoload.php';
 require_once BPATH.'/inc/function.php';
-require_once BPATH.'/inc/wot.class.php';
 require_once BPATH.'/config.php';
 
 if(jpWseConfig::$debug) {
@@ -63,7 +62,7 @@ $app = jpWseApp::getInstance();
 			<div class="row">
 				<div class="col-lg-12 small text-center">
 					<span class="text-muted">
-						&copy; <?=date('Y')?> JPlace <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
+						&copy; <?=date('Y')?> Philipp John <a href="http://www.jplace.de" target="_blank">www.jplace.de</a>
 					</span>
 					<div class="pull-right">
 						<?php jpWseTemplate::render('filter.lang') ?>

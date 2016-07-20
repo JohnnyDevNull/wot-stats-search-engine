@@ -8,13 +8,35 @@
 
 $shipTypes = $result['ship_types'];
 $nations = $result['nations'];
+$armament = $result['armament'];
 $language = jpWseLanguage::getInstance();
 
 ?>
 
 <div class="row">
-	<div class="col-lg-offset-1 col-lg-4">
-		<h4><?=$language->get('STATS_VEHICLE_TYPES_HEADLINE')?></h4>
+	<div class="col-lg-4">
+		<h4><?=$language->get('STATS_ARMAMENT_HEADLINE')?> (PVP)</h4>
+		<table class="table">
+			<tr>
+				<td><?=$language->get('STATS_ARMAMENT_MAIN_BATTERY_LABEL')?></td>
+				<td><?=$armament['main_battery']?></td>
+			</tr>
+			<tr>
+				<td><?=$language->get('STATS_ARMAMENT_AIRCRAFT_LABEL')?></td>
+				<td><?=$armament['aircraft']?></td>
+			</tr>
+			<tr>
+				<td><?=$language->get('STATS_ARMAMENT_TORPEDOS_LABEL')?></td>
+				<td><?=$armament['torpedos']?></td>
+			</tr>
+			<tr>
+				<td><?=$language->get('STATS_ARMAMENT_OTHER_LABEL')?></td>
+				<td><?=$armament['other']?></td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-lg-4">
+		<h4><?=$language->get('STATS_VEHICLE_TYPES_HEADLINE')?> (PVP)</h4>
 		<table class="table">
 			<?php foreach($shipTypes as $type) : ?>
 				<tr>
@@ -25,8 +47,8 @@ $language = jpWseLanguage::getInstance();
 			<?php endforeach; ?>
 		</table>
 	</div>
-	<div class="col-lg-offset-1 col-lg-4">
-		<h4><?=$language->get('STATS_VEHICLE_NATIONS_HEADLINE')?></h4>
+	<div class="col-lg-4">
+		<h4><?=$language->get('STATS_VEHICLE_NATIONS_HEADLINE')?> (PVP)</h4>
 		<table class="table">
 			<?php foreach($nations as $nation) : ?>
 				<tr>
@@ -39,8 +61,8 @@ $language = jpWseLanguage::getInstance();
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-offset-1 col-lg-9">
-		<h4><?=$language->get('STATS_VEHICLE_VEHICLES_HEADLINE')?></h4>
+	<div class="col-lg-12">
+		<h4><?=$language->get('STATS_SHIPS_HEADLINE')?></h4>
 		<div class="vehicles-scrollbox">
 			<table class="table">
 				<colgroup>
@@ -58,7 +80,6 @@ $language = jpWseLanguage::getInstance();
 					<th><?=$language->get('STATS_SHIPS_TABLE_WINS_TEXT')?></th>
 					<th><?=$language->get('STATS_SHIPS_TABLE_FRAGS_TEXT')?></th>
 					<th><?=$language->get('STATS_SHIPS_TABLE_PLANES_TEXT')?></th>
-					<th></th>
 				</tr>
 				<?php
 				$vi = 1;

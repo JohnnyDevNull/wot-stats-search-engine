@@ -89,7 +89,7 @@ $language = jpWseLanguage::getInstance();
 		<h4><?=$language->get('STATS_PERFORMANCE_HEADLINE')?></h4>
 		<table class="table">
 			<tr>
-				<td><?=$language->get('STATS_PERFORMANCE_FRAGS_LABEL')?></td>
+				<td><?=$language->get('STATS_PERFORMANCE_FRAGS_WOT_LABEL')?></td>
 				<td><?=number_format($statsAll->frags)?></td>
 			</tr>
 			<tr>

@@ -34,7 +34,10 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 		$this->data['info_ship_nations'] = $info->data->ship_nations;
 		$this->data['info_ship_types'] = $info->data->ship_types;
 
-		$this->_loadExtendedVehiclesData();
+		if(!empty($this->data['warships']->data->{$accountID})) {
+			$this->_loadExtendedVehiclesData();
+			$this->_sortShips();
+		}
 	}
 
 	/**
@@ -43,11 +46,6 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 	protected function _loadExtendedVehiclesData()
 	{
 		$accountID = $this->data['account_id'];
-
-		if(empty($this->data['warships']->data->{$accountID})) {
-			return;
-		}
-
 		$warships = $this->data['warships']->data->{$accountID};
 		$this->data['shipinfo'] = [];
 		$shipIdArray = [];
@@ -87,6 +85,13 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 			}
 		}
 
+		$this->data['armament'] = [
+			'main_battery' => 0,
+			'aircraft' => 0,
+			'torpedos' => 0,
+			'other' => 0,
+		];
+
 		foreach($warships as $ship)
 		{
 			$type = $this->data['shipinfo']->data->{$ship->ship_id}->type;
@@ -97,6 +102,31 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 
 			$this->data['nations'][$nation]['wins'] += $ship->pvp->wins;
 			$this->data['nations'][$nation]['battles'] += $ship->pvp->battles;
+
+			$this->data['armament']['main_battery'] += (int)$ship->pvp->main_battery->frags;
+			$this->data['armament']['aircraft'] += (int)$ship->pvp->aircraft->frags;
+			$this->data['armament']['torpedos'] += (int)$ship->pvp->torpedoes->frags;
+
+			$this->data['armament']['other'] += (int)$ship->pvp->second_battery->frags;
+			$this->data['armament']['other'] += (int)$ship->pvp->ramming->frags;
 		}
+
+		// add now the other frags from sunk and burn down
+		$accountFrags = $this->data['info']->data->{$accountID}->statistics->pvp->frags;
+		$otherFrags = array_sum($this->data['armament']);
+		$this->data['armament']['other'] += $accountFrags - $otherFrags;
+	}
+
+	/**
+	 * Sorts the warships array from most partcipated battles to lowest.
+	 */
+	protected function _sortShips()
+	{
+		usort (
+			$this->data['warships']->data->{$this->data['account_id']},
+			function($a, $b) {
+				return (int)$a->pvp->battles < (int)$b->pvp->battles;
+			}
+		);
 	}
 }

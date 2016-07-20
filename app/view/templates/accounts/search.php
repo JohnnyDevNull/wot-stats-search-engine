@@ -7,9 +7,10 @@
  */
 
 $count = 0;
+$accounts = array();
 
-if(!isset($data['result'])) {
-	$data['result'] = [];
+if(!empty($data['result']->data)) {
+	$accounts = $data['result']->data;
 }
 
 $game = $data['request']['accounts']['game'];
@@ -40,16 +41,16 @@ $language = jpWseLanguage::getInstance();
 						</span>
 					</th>
 				</tr>
-			<?php foreach($data['result']->data as $searchResult) : ?>
+			<?php foreach($accounts as $account) : ?>
 				<tr>
 					<td><?=++$count?></td>
-					<td><?=$searchResult->nickname?></td>
-					<td><?=$searchResult->account_id?></td>
+					<td><?=$account->nickname?></td>
+					<td><?=$account->account_id?></td>
 					<td>
 						<button type="submit"
 								class="btn btn-default btn-xs"
 								name="request[accounts][detail]"
-								value="<?=$searchResult->account_id?>">
+								value="<?=$account->account_id?>">
 							<span class="glyphicon glyphicon-search"
 								  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">
 							</span>

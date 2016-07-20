@@ -11,7 +11,7 @@ $nations = $result['nations'];
 $language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
-	<div class="col-lg-offset-1 col-lg-4">
+	<div class="col-lg-offset-4 col-lg-4">
 		<h4><?=$language->get('STATS_VEHICLE_TYPES_HEADLINE')?></h4>
 		<table class="table">
 			<?php foreach($vehicleTypes as $type) : ?>
@@ -23,7 +23,7 @@ $language = jpWseLanguage::getInstance();
 			<?php endforeach; ?>
 		</table>
 	</div>
-	<div class="col-lg-offset-1 col-lg-4">
+	<div class="col-lg-4">
 		<h4><?=$language->get('STATS_VEHICLE_NATIONS_HEADLINE')?></h4>
 		<table class="table">
 			<?php foreach($nations as $nation) : ?>
@@ -37,10 +37,24 @@ $language = jpWseLanguage::getInstance();
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-offset-1 col-lg-9">
+	<div class="col-lg-12">
 		<h4><?=$language->get('STATS_VEHICLE_VEHICLES_HEADLINE')?></h4>
 		<div class="vehicles-scrollbox">
 			<table class="table">
+				<colgroup>
+					<col>
+					<col>
+					<col>
+					<col>
+					<col>
+				</colgroup>
+				<tr>
+					<th><?=$language->get('STATS_VEHICLE_TABLE_COUNTER_TEXT')?></th>
+					<th><?=$language->get('STATS_VEHICLE_TABLE_TIER_TEXT')?></th>
+					<th><?=$language->get('STATS_VEHICLE_TABLE_BATTLES_TEXT')?></th>
+					<th><?=$language->get('STATS_VEHICLE_TABLE_WINS_TEXT')?></th>
+					<th><?=$language->get('STATS_VEHICLE_TABLE_MASTERY_TEXT')?></th>
+				</tr>
 				<?php
 				$vi = 1;
 
@@ -59,7 +73,7 @@ $language = jpWseLanguage::getInstance();
 						</td>
 						<td><?=$vehicle->statistics->battles?></td>
 						<td><?=$vehicle->statistics->wins?></td>
-						<td class="text-center">
+						<td>
 							<?php
 							$url = 'http://worldoftanks.eu/static/3.23.0.3/common/img/classes/';
 
@@ -89,8 +103,6 @@ $language = jpWseLanguage::getInstance();
 								<img src="<?=$url.$image.'.png'?>"
 									 alt ="<?=$title?>"
 									 title="<?=$title?>" />
-							<?php else : ?>
-								-
 							<?php endif; ?>
 						</td>
 					</tr>

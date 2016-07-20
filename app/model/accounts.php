@@ -19,7 +19,7 @@ class jpWseModelAccounts extends jpWseModel
 		switch($this->apiCall) {
 			case 'search':
 				$this->data = $this->gameReader->getAccountList (
-					$this->requestData[$this->apiCall],
+					strip_tags($this->requestData[$this->apiCall]),
 					jpWseConfig::$apiFields['wot']['accounts']['search'],
 					'',
 					$this->requestData['limit']

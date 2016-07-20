@@ -36,28 +36,6 @@ $language = jpWseLanguage::getInstance();
 				<td><?=$language->get('STATS_GENERAL_LEVEL_LABEL')?></td>
 				<td><?=(int)$info->leveling_tier?></td>
 			</tr>
-			<!--	NOT IMPLEMENTED YET IN WARGAMING WOWS API
-			<tr>
-				<td><?=$language->get('STATS_GENERAL_RATING_LABEL')?></td>
-				<td><?=number_format($info->global_rating)?></td>
-			</tr>
-
-			<tr>
-				<td><?=$language->get('STATS_GENERAL_LANGUAGE_LABEL')?></td>
-				<td><?=strtoupper($info->client_language)?></td>
-			</tr>
-			<tr>
-				<td><?=$language->get('STATS_GENERAL_CLAN_LABEL')?></td>
-				<td>
-					<?php if ($clan === false) : ?>
-						<?=$language->get('TEXT_NO_CLAN')?>
-					<?php else : ?>
-						<span class="detail_clan_name"><?=$clan->name?></span>
-						<span class="detail_clan_tag">[<?=$clan->tag?>]</span>
-					<?php endif; ?>
-				</td>
-			</tr>
-			-->
 		</table>
 	</div>
 	<div class="col-lg-4">
@@ -105,7 +83,7 @@ $language = jpWseLanguage::getInstance();
 		<h4><?=$language->get('STATS_PERFORMANCE_HEADLINE')?> (PVP)</h4>
 		<table class="table">
 			<tr>
-				<td><?=$language->get('STATS_PERFORMANCE_FRAGS_LABEL')?></td>
+				<td><?=$language->get('STATS_PERFORMANCE_FRAGS_WOWS_LABEL')?></td>
 				<td><?=number_format($stats->pvp->frags)?></td>
 			</tr>
 			<tr>
