@@ -33,15 +33,21 @@ class jpWseView
 	public function render()
 	{
 		$app = jpWseApp::getInstance();
-		jpWseTemplate::render('main.navigation');
+
+		if(empty(jpWseConfig::$layouts['main.navigation']['hide'])) {
+			jpWseTemplate::render('main.navigation');
+		}
 
 		?>
 		<div id="main" role="main">
 			<?php
-			jpWseTemplate::render (
-				$app->getPageKey().'.filterarea',
-				$this->controller->getRequestData()
-			);
+
+			if(empty(jpWseConfig::$layouts[$app->getPageKey().'.filterarea']['hide'])) {
+				jpWseTemplate::render (
+					$app->getPageKey().'.filterarea',
+					$this->controller->getRequestData()
+				);
+			}
 
 			if(!empty($this->model)) {
 				jpWseTemplate::render (

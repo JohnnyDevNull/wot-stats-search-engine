@@ -8,6 +8,13 @@
 abstract class jpWseConfig
 {
 	/**
+	 * Set it to empty string '' if you don't want to display a title.
+	 *
+	 * @var string
+	 */
+	public static $title = 'WGGames Search Engine';
+
+	/**
 	 * @var bool
 	 */
 	public static $debug = false;
@@ -46,6 +53,11 @@ abstract class jpWseConfig
 		'host' => null,
 		'port' => null,
 	];
+
+	/**
+	 * @var string
+	 */
+	public static $cssTheme = '';
 
 	/**
 	 * @var string[]
@@ -194,5 +206,23 @@ abstract class jpWseConfig
 				],
 			],
 		],
+	];
+
+	/**
+	 * @var mixed[]
+	 */
+	public static $layouts = [
+		'main.navigation' => [
+			'hide' => false,
+		],
+		'accounts.filterarea' => [
+			'hide' => false,
+		],
+		'clans.filterarea' => [
+			'hide' => false,
+		],
+		'language_switcher' => [
+			'hide' => false,
+		]
 	];
 }
