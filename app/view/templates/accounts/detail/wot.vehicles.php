@@ -48,13 +48,16 @@ $language = jpWseLanguage::getInstance();
 					<col>
 					<col>
 				</colgroup>
-				<tr>
-					<th><?=$language->get('STATS_VEHICLE_TABLE_COUNTER_TEXT')?></th>
-					<th><?=$language->get('STATS_VEHICLE_TABLE_TIER_TEXT')?></th>
-					<th><?=$language->get('STATS_VEHICLE_TABLE_BATTLES_TEXT')?></th>
-					<th><?=$language->get('STATS_VEHICLE_TABLE_WINS_TEXT')?></th>
-					<th><?=$language->get('STATS_VEHICLE_TABLE_MASTERY_TEXT')?></th>
-				</tr>
+				<thead>
+					<tr>
+						<th><?=$language->get('STATS_VEHICLE_TABLE_COUNTER_TEXT')?></th>
+						<th><?=$language->get('STATS_VEHICLE_TABLE_TIER_TEXT')?></th>
+						<th><?=$language->get('STATS_VEHICLE_TABLE_BATTLES_TEXT')?></th>
+						<th><?=$language->get('STATS_VEHICLE_TABLE_WINS_TEXT')?></th>
+						<th><?=$language->get('STATS_VEHICLE_TABLE_MASTERY_TEXT')?></th>
+					</tr>
+				</thead>
+				<tbody>
 				<?php
 				$vi = 1;
 
@@ -109,6 +112,7 @@ $language = jpWseLanguage::getInstance();
 					<?php
 					$vi++;
 				endforeach; ?>
+				</tbody>
 			</table>
 		</div>
 	</div>
