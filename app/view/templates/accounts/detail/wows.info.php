@@ -17,7 +17,7 @@ $language = jpWseLanguage::getInstance();
 
 ?>
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-lg-4 jp-wse-box-container">
 		<h4><?=$language->get('STATS_GENERAL_HEADLINE')?></h4>
 		<table class="table">
 			<tr>
@@ -38,7 +38,7 @@ $language = jpWseLanguage::getInstance();
 			</tr>
 		</table>
 	</div>
-	<div class="col-lg-4">
+	<div class="col-lg-4 jp-wse-box-container">
 		<h4><?=$language->get('STATS_OVERALL_HEADLINE')?> (PVP)</h4>
 		<table class="table">
 			<tr>
@@ -79,7 +79,7 @@ $language = jpWseLanguage::getInstance();
 			</tr>
 		</table>
 	</div>
-	<div class="col-lg-4">
+	<div class="col-lg-4 jp-wse-box-container">
 		<h4><?=$language->get('STATS_PERFORMANCE_HEADLINE')?> (PVP)</h4>
 		<table class="table">
 			<tr>

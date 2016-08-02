@@ -108,3 +108,9 @@
 	-khtml-opacity: 0.6;
 	opacity: 0.6;
 }
+
+.clan.members.leader {
+	font-weight: bold;
+	color: navy;
+	font-size: 14px;
+}
