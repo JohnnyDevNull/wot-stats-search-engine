@@ -16,7 +16,7 @@ $game = $data['request']['clans']['game'];
 $language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-12 jp-wse-container">
 		<form role="form"
 			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
@@ -30,34 +30,38 @@ $language = jpWseLanguage::getInstance();
 					<col />
 					<col style="width: 40px;"/>
 				</colgroup>
-				<tr>
-					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_COUNTER_TEXT')?></th>
-					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_NAME_TEXT')?></th>
-					<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_CLANID_TEXT')?></th>
-					<th>
-						<span class="glyphicon glyphicon-cog"
-							  title="<?=$language->get('ICON_ACTIONS_TITLE')?>"
-							  style="margin-left: 5px;">
-						</span>
-					</th>
-				</tr>
-			<?php foreach($data['result']->data as $searchResult) : ?>
-				<tr>
-					<td><?=++$count?></td>
-					<td><?=$searchResult->name?> [ <?=$searchResult->tag?> ]</td>
-					<td><?=$searchResult->clan_id?></td>
-					<td>
-						<button type="submit"
-								class="btn btn-default btn-xs"
-								name="request[clans][detail]"
-								value="<?=$searchResult->clan_id?>">
-							<span class="glyphicon glyphicon-search"
-								  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">
+				<thead>
+					<tr>
+						<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_COUNTER_TEXT')?></th>
+						<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_NAME_TEXT')?></th>
+						<th><?=$language->get('SEARCH_RESULT_TABLE_HEAD_CLANID_TEXT')?></th>
+						<th>
+							<span class="glyphicon glyphicon-cog"
+								  title="<?=$language->get('ICON_ACTIONS_TITLE')?>"
+								  style="margin-left: 5px;">
 							</span>
-						</button>
-					</td>
-				</tr>
-			<?php endforeach; ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($data['result']->data as $searchResult) : ?>
+					<tr>
+						<td><?=++$count?></td>
+						<td><?=$searchResult->name?> [ <?=$searchResult->tag?> ]</td>
+						<td><?=$searchResult->clan_id?></td>
+						<td>
+							<button type="submit"
+									class="btn btn-default btn-xs"
+									name="request[clans][detail]"
+									value="<?=$searchResult->clan_id?>">
+								<span class="glyphicon glyphicon-search"
+									  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">
+								</span>
+							</button>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
 			</table>
 		</form>
 	</div>
