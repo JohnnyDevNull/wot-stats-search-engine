@@ -11,7 +11,7 @@ $nations = $result['nations'];
 $language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
-	<div class="col-lg-offset-4 col-lg-4 jp-wse-box-container">
+	<div class="col-lg-offset-4 col-lg-4 jp-wse-container">
 		<h4><?=$language->get('STATS_VEHICLE_TYPES_HEADLINE')?></h4>
 		<table class="table">
 			<?php foreach($vehicleTypes as $type) : ?>
@@ -23,7 +23,7 @@ $language = jpWseLanguage::getInstance();
 			<?php endforeach; ?>
 		</table>
 	</div>
-	<div class="col-lg-4 jp-wse-box-container">
+	<div class="col-lg-4 jp-wse-container">
 		<h4><?=$language->get('STATS_VEHICLE_NATIONS_HEADLINE')?></h4>
 		<table class="table">
 			<?php foreach($nations as $nation) : ?>
@@ -37,7 +37,7 @@ $language = jpWseLanguage::getInstance();
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-12 jp-wse-box-container">
+	<div class="col-lg-12 jp-wse-container">
 		<h4><?=$language->get('STATS_VEHICLE_VEHICLES_HEADLINE')?></h4>
 		<div class="vehicles-scrollbox">
 			<table class="table">

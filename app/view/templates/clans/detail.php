@@ -16,7 +16,7 @@ $language = jpWseLanguage::getInstance();
 	<div class="col-lg-12">
 		<div id="info">
 			<div class="row">
-				<div class="col-lg-12 jp-wse-box-container">
+				<div class="col-lg-12 jp-wse-container">
 					<h4><?=$language->get('DETAIL_GENERAL_HEADLINE')?></h4>
 					<div class="row">
 						<div class="col-lg-6">
@@ -63,7 +63,7 @@ $language = jpWseLanguage::getInstance();
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12 jp-wse-box-container">
+				<div class="col-lg-12 jp-wse-container">
 					<h4><?=$language->get('DETAIL_MEMBERS_HEADLINE')?></h4>
 					<table class="table">
 						<colgroup>
