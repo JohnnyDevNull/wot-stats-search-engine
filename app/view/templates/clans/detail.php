@@ -5,7 +5,6 @@
  * @copyright (c) 2014, Philipp John
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
-
 $result = $data['result'];
 $clanID = $result['clan_id'];
 $info = $result['info']->data->{$clanID};
@@ -109,9 +108,12 @@ $language = jpWseLanguage::getInstance();
 										  method="post"
 										  class="form-inline"
 										  style="display: inline;">
+										<input type="hidden" name="request[game]" value="<?=$data['request']['game']?>" />
+										<input type="hidden" name="request[page]" value="accounts" />
+										<input type="hidden" name="request[call]" value="detail" />
 										<button type="submit"
 												class="btn btn-default btn-xs"
-												name="request[accounts][detail]"
+												name="request[detail]"
 												value="<?=$member->account_id?>">
 											<span class="glyphicon glyphicon-search"
 												  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">

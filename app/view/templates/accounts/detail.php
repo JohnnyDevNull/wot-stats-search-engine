@@ -35,7 +35,7 @@ if(!empty($data['result'])) {
 	}
 }
 
-$game = $data['request'][$data['page']]['game'];
+$game = $data['request']['game'];
 ?>
 <div class="row">
 	<div class="col-lg-12">

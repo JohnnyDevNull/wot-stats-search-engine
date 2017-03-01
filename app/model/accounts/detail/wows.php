@@ -16,7 +16,7 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 
 		$app = jpWseApp::getInstance();
 
-		$accountID = $this->data['account_id'] = $this->requestData[$this->apiCall];
+		$accountID = $this->data['account_id'] = $this->requestData['detail'];
 
 		$this->data['info'] = $this->gameReader->getAccountInfo (
 			$accountID,
@@ -68,6 +68,11 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 		);
 
 		foreach($this->data['shipinfo']->data as $shipInfo) {
+
+			if(empty($shipInfo)) {
+				continue;
+			}
+
 			if(!isset($this->data['ship_types'][$shipInfo->type])) {
 				$this->data['ship_types'][$shipInfo->type] = [
 					'type_i18n' => $this->data['info_ship_types']->{$shipInfo->type},
@@ -92,8 +97,11 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 			'other' => 0,
 		];
 
-		foreach($warships as $ship)
-		{
+		foreach($warships as $ship) {
+			if(empty($this->data['shipinfo']->data->{$ship->ship_id})) {
+				continue;
+			}
+
 			$type = $this->data['shipinfo']->data->{$ship->ship_id}->type;
 			$nation = $this->data['shipinfo']->data->{$ship->ship_id}->nation;
 

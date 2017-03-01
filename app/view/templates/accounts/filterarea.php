@@ -11,16 +11,16 @@ $limit = 20;
 $game = jpWseConfig::$game;
 $page = $data['page'];
 
-if(!empty($data[$page]['search'])) {
-	$search = $data[$page]['search'];
+if(!empty($data['search'])) {
+	$search = $data['search'];
 }
 
-if(!empty($data[$page]['limit'])) {
-	$limit = $data[$page]['limit'];
+if(!empty($data['limit'])) {
+	$limit = $data['limit'];
 }
 
-if(!empty($data[$page]['game'])) {
-	$game = $data[$page]['game'];
+if(!empty($data['game'])) {
+	$game = $data['game'];
 }
 
 $language = jpWseLanguage::getInstance();
@@ -32,6 +32,9 @@ $language = jpWseLanguage::getInstance();
 				  role="form"
 				  action="index.php?page=<?=$data['page']?>"
 				  method="post">
+				<input type="hidden"
+					   name="request[page]"
+					   value="<?=$data['page']?>" />
 				<div class="form-group">
 					<?php
 					jpWseTemplate::render (

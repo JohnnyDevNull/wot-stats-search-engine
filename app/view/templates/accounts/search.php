@@ -13,7 +13,6 @@ if(!empty($data['result']->data)) {
 	$accounts = $data['result']->data;
 }
 
-$game = $data['request']['accounts']['game'];
 $language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
@@ -21,7 +20,9 @@ $language = jpWseLanguage::getInstance();
 		<form role="form"
 			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
-			<input type="hidden" name="game" value="<?=$game?>" />
+			<input type="hidden" name="request[page]" value="accounts" />
+			<input type="hidden" name="request[call]" value="detail" />
+			<input type="hidden" name="game" value="<?=$data['request']['game']?>" />
 			<table class="table table-striped no_succession">
 				<colgroup>
 					<col style="width: 60px;" />
@@ -52,7 +53,7 @@ $language = jpWseLanguage::getInstance();
 						<td>
 							<button type="submit"
 									class="btn btn-default btn-xs"
-									name="request[accounts][detail]"
+									name="request[detail]"
 									value="<?=$account->account_id?>">
 								<span class="glyphicon glyphicon-search"
 									  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">

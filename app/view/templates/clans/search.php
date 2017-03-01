@@ -12,7 +12,6 @@ if(!isset($data['result'])) {
 	$data['result'] = array();
 }
 
-$game = $data['request']['clans']['game'];
 $language = jpWseLanguage::getInstance();
 ?>
 <div class="row">
@@ -20,7 +19,9 @@ $language = jpWseLanguage::getInstance();
 		<form role="form"
 			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
-			<input type="hidden" name="game" value="<?=$game?>" />
+			<input type="hidden" name="request[page]" value="clans" />
+			<input type="hidden" name="request[call]" value="detail" />
+			<input type="hidden" name="request[game]" value="<?=$data['request']['game']?>" />
 			<table class="table table-striped">
 				<colgroup>
 					<col style="width: 60px;" />
@@ -52,7 +53,7 @@ $language = jpWseLanguage::getInstance();
 						<td>
 							<button type="submit"
 									class="btn btn-default btn-xs"
-									name="request[clans][detail]"
+									name="request[detail]"
 									value="<?=$searchResult->clan_id?>">
 								<span class="glyphicon glyphicon-search"
 									  title="<?=$language->get('BUTTON_DETAIL_VIEW_TITLE')?>">

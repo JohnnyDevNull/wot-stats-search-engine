@@ -24,24 +24,6 @@ $sessionLang = jpWseSession::get('active_language');
 			<i class="icon ico_de <?=($sessionLang == 'de') ? '' : 'inactive'?>"></i>
 			<span class="sr-only">Deutsch</span>
 		</a>
-<!--
-		<a title="Türkçe" data-langkey="tr">
-			<i class="icon ico_tr <?=($sessionLang == 'tr') ? '' : 'inactive'?>"></i>
-			<span class="sr-only">Türkçe</span>
-		</a>
-		<a title="Español" data-langkey="es">
-			<i class="icon ico_es <?=($sessionLang == 'es') ? '' : 'inactive'?>"></i>
-			<span class="sr-only">Español</span>
-		</a>
-		<a title="Čeština" data-langkey="cz">
-			<i class="icon ico_cz <?=($sessionLang == 'cz') ? '' : 'inactive'?>"></i>
-			<span class="sr-only">Čeština</span>
-		</a>
-		<a title="Polski" data-langkey="pl">
-			<i class="icon ico_pl <?=($sessionLang == 'pl') ? '' : 'inactive'?>"></i>
-			<span class="sr-only">Polski</span>
-		</a>
--->
 	</div>
 </form>
 <script>

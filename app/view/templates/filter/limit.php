@@ -22,7 +22,7 @@ if(!isset($data['title'])) {
 	$data['title'] = '';
 }
 ?>
-<select name="request[<?=$data['page']?>][limit]"
+<select name="request[limit]"
 		class="form-control input-sm"
 		title="<?=$data['title']?>">
 <?php foreach($data['limit_entries'] as $limit) : ?>

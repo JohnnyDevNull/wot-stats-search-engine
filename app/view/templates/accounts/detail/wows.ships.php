@@ -87,28 +87,32 @@ $language = jpWseLanguage::getInstance();
 				<?php
 				$vi = 1;
 
-				foreach($warships as $ship) :
+				foreach($warships as $ship) {
 					$shipData = $shipInfo->{$ship->ship_id};
-					?>
-					<tr>
-						<td><?=$vi?></td>
-						<td>
-							<div class="vehicle-wrapper">
-								<span class="level"><?=romanic_number((int)$shipData->tier)?></span>
-								<img src="<?=$shipData->images->small?>"
-									 alt="<?=$shipData->ship_id_str?>"
-									 style="max-height: 30px;"/>
-							</div>
-							<span class="name"><?=$shipData->name?></span>
-						</td>
-						<td><?=$ship->pvp->battles?></td>
-						<td><?=$ship->pvp->wins?></td>
-						<td><?=$ship->pvp->frags?></td>
-						<td><?=$ship->pvp->planes_killed?></td>
-					</tr>
-					<?php
+
+					if(isset($shipData->tier, $shipData->images->small, $shipData->ship_id_str, $shipData->name)) {
+						?>
+						<tr>
+							<td><?=$vi?></td>
+							<td>
+								<div class="vehicle-wrapper">
+									<span class="level"><?=romanic_number((int)$shipData->tier)?></span>
+									<img src="<?=$shipData->images->small?>"
+										 alt="<?=$shipData->ship_id_str?>"
+										 style="max-height: 30px;"/>
+								</div>
+								<span class="name"><?=$shipData->name?></span>
+							</td>
+							<td><?=$ship->pvp->battles?></td>
+							<td><?=$ship->pvp->wins?></td>
+							<td><?=$ship->pvp->frags?></td>
+							<td><?=$ship->pvp->planes_killed?></td>
+						</tr>
+						<?php
+					}
 					$vi++;
-				endforeach; ?>
+				}
+				?>
 				</tbody>
 			</table>
 		</div>

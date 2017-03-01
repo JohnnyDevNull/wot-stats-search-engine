@@ -21,20 +21,23 @@ $activeLink = 'index.php?'.$_SERVER['QUERY_STRING'];
 						continue;
 					}
 
-					if(isset($item['static_name'])) {
+					$isStatic = isset($item['static_name'], $item['static_key']);
+
+					if($isStatic) {
 						$title = $text = $item['static_name'];
 					} else {
 						$title = $language->get('MENU_ITEM_'.$item['lang_constant'].'_TITLE');
 						$text = $language->get('MENU_ITEM_'.$item['lang_constant'].'_TEXT');
 					}
 
-					$query = '';
+					$link = 'index.php?';
 
-					if(isset($item['params'])) {
-						$query = '&'.http_build_query($item['params']);
+					if(isset($item['static_key'])) {
+						$link .= 'static='.$item['static_key'];
+					} else {
+						$link .= 'page='.$item['page'];
 					}
 
-					$link = 'index.php?page='.$item['page'].$query;
 					?>
 				<li id="item_<?=(int)$index?>" <?=$activeLink == $link ? 'class="active"' : ''?>>
 					<a href="<?=$link?>"

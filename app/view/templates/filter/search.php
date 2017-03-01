@@ -30,9 +30,12 @@ if(!isset($data['placeholder'])) {
 	   class="sr-only">
 	<?=$data['label']?>
 </label>
+<input type="hidden"
+	   name="request[call]"
+	   value="search" />
 <input type="text"
 	   class="form-control input-sm"
-	   name="request[<?=$data['page']?>][search]"
+	   name="request[search]"
 	   placeholder="<?=$data['placeholder']?>"
 	   id="<?=$data['id']?>"
 	   value="<?=$data['last_value']?>"

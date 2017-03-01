@@ -113,3 +113,17 @@ function printVar($var)
 	}
 	echo '</pre>';
 }
+
+/**
+ * @param mixed $_arg
+ */
+function dump($_arg)
+{
+	$args = func_get_args();
+
+	foreach($args as $arg) {
+		echo '<pre>';
+		print_r($arg);
+		echo '</pre>';
+	}
+}

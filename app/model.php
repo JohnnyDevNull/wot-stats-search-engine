@@ -37,8 +37,7 @@ class jpWseModel
 	 */
 	public function load()
 	{
-		$request = array_keys($this->requestData);
-		$this->apiCall = reset($request);
+		$this->apiCall = $this->requestData['call'];
 
 		if(!isset($this->requestData['game'])) {
 			throw new LogicException('game index is missing in request data');

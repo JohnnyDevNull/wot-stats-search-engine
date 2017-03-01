@@ -17,7 +17,7 @@ abstract class jpWseConfig
 	/**
 	 * @var bool
 	 */
-	public static $debug = false;
+	public static $debug = true;
 
 	/**
 	 * @var string
@@ -198,12 +198,12 @@ abstract class jpWseConfig
 		4 => [
 			'page' => 'clans',
 			'static_name' => 'Spitze Voraus',
+			'static_key' => 'spvo',
 			'params' => [
-				'request' => [
-					'clans' => [
-						'detail' => 500075945,
-					],
-				],
+				'call' => 'detail',
+				'sub' => 'detail',
+				'game' => 'wows',
+				'detail' => 500075945,
 			],
 		],
 	];

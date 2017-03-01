@@ -71,29 +71,41 @@ class jpWseApp
 		$language = jpWseLanguage::getInstance();
 		$language->load('main', BPATH, $langKey);
 		$language->load('filter', BPATH, $langKey);
-		$language->load($this->page, BPATH, $langKey);
 
 		$controller = $this->getControllerInstance();
 
-		$request = getPostValue('request');
+		$request = [];
+		$staticKey = getGetValue('static');
 
-		if(empty($request)) {
-			$request = getGetValue('request');
-		}
+		if(empty($staticKey)) {
+			$request = getPostValue('request');
 
-		if(!empty($request)) {
-			if(empty($request[$this->page]['game'])) {
-				$request[$this->page]['game'] = strip_tags(getPostValue('game'));
+			if(!empty($request)) {
+				if(empty($request['game'])) {
+					$request['game'] = strip_tags(getPostValue('game'));
 
-				if(empty($request[$this->page]['game'])) {
-					$request[$this->page]['game'] = jpWseConfig::$game;
+					if(empty($request['game'])) {
+						$request['game'] = jpWseConfig::$game;
+					}
 				}
 			}
+		} else {
+			$item = $this->getStaticItemByKey($staticKey);
 
-			$controller->setRequestData($request);
+			if(!empty($item['page'])) {
+				$this->page = $item['page'];
+
+				if(!empty($item['params'])) {
+					$request = $item['params'];
+					$request['page'] = $this->page;
+				}
+			}
 		}
 
-		$controller->index();
+		$language->load($this->page, BPATH, $langKey);
+
+        $controller->setRequestData($request);
+        $controller->index();
 	}
 
 	/**
@@ -182,5 +194,24 @@ class jpWseApp
 			default:
 				return strtolower($key).'-'.strtoupper($key);
 		}
+	}
+
+	/**
+	 * @param string $staticKey
+	 * @return mixed[]
+	 */
+	private function getStaticItemByKey($staticKey)
+	{
+		foreach(jpWseConfig::$menuItems as $item)
+		{
+			if (
+				isset($item['static_key'])
+				&& $item['static_key'] == $staticKey
+			) {
+				return $item;
+			}
+		}
+
+		return [];
 	}
 }

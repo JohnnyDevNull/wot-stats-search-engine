@@ -31,7 +31,7 @@ if(!isset($data['title'])) {
 	$data['title'] = '';
 }
 ?>
-<select name="request[<?=$data['page']?>][game]"
+<select name="request[game]"
 		class="form-control input-sm"
 		title="<?=$data['title']?>">
 	<?php foreach($data['game_entries'] as $game) : ?>

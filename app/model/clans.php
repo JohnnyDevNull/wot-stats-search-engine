@@ -17,14 +17,14 @@ class jpWseModelClans extends jpWseModel
 		switch($this->apiCall) {
 			case 'search':
 				$this->data = $this->clanReader->getClansList (
-					$this->requestData[$this->apiCall],
+					$this->requestData['search'],
 					jpWseConfig::$apiFields['clans']['search'],
 					$this->requestData['limit']
 				);
 				break;
 
 			case 'detail':
-				$this->data['clan_id'] = $this->requestData[$this->apiCall];
+				$this->data['clan_id'] = $this->requestData['detail'];
 
 				$this->data['info'] = $this->clanReader->getClansInfo (
 					$this->data['clan_id'],

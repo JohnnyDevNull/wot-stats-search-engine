@@ -20,9 +20,9 @@ class jpWseController
 		$app = jpWseApp::getInstance();
 		$model = null;
 
-		if(!empty($this->_request[$app->getPageKey()])) {
-			$model = $app->getModelInstance($app->getPageKey());
-			$model->setRequestData($this->_request[$app->getPageKey()]);
+		if(!empty($this->_request)) {
+			$model = $app->getModelInstance($this->_request['page']);
+			$model->setRequestData($this->_request);
 			$model->load();
 		}
 
