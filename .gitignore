@@ -50,6 +50,7 @@ nbproject
 
 # user specific files
 config.php
+assets/css/custom.css
 
 # Other user defined
 devfile.php
