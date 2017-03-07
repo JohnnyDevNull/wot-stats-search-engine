@@ -59,7 +59,7 @@ $app = jpWseApp::getInstance();
 		<div class="container">
 			<?php if(!empty(jpWseConfig::$title)) : ?>
 			<div class="page-header">
-				<h1>WGGames Search Engine</h1>
+				<h1><?=jpWseConfig::$title?></h1>
 			</div>
 			<?php endif; ?>
 			<div class="row" id="contentbox">
