@@ -20,6 +20,7 @@ $language = jpWseLanguage::getInstance();
 		<form role="form"
 			  action="index.php?page=<?=$data['page']?>&sub=detail"
 			  method="post">
+			<input type="hidden" name="request[search]" value="<?=$data['request']['search']?>" />
 			<input type="hidden" name="request[page]" value="accounts" />
 			<input type="hidden" name="request[call]" value="detail" />
 			<input type="hidden" name="game" value="<?=$data['request']['game']?>" />
