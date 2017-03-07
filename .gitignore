@@ -48,5 +48,8 @@ nbproject
 # phpStorm
 .idea
 
+# user specific files
+config.php
+
 # Other user defined
 devfile.php
