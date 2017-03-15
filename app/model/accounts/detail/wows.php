@@ -23,7 +23,6 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 			jpWseConfig::$apiFields['wows']['accounts']['detail']
 		);
 
-		// @todo watch later for limitation... in wot the call has a max. of 50
 		$this->data['warships'] = $this->gameReader->getShipsStats($accountID);
 
 		$infoModel = $app->getModelInstance('InfoWows');
@@ -62,10 +61,30 @@ class jpWseModelAccountsDetailWows extends jpWseModel
 			return;
 		}
 
-		$this->data['shipinfo'] = $this->gameReader->getEncyclopediaShips (
-			implode(',', $shipIdArray),
-			jpWseConfig::$apiFields['wiki']['shipinfo']
-		);
+		$idCount = count($shipIdArray);
+
+		while($idCount)
+		{
+			$callIdArray = array_splice($shipIdArray, 0, $idCount > 20 ? 20 : $idCount);
+			$idCount = count($shipIdArray);
+
+			$shipInfo = $this->gameReader->getEncyclopediaShips (
+				implode(',', $callIdArray),
+				jpWseConfig::$apiFields['wiki']['shipinfo']
+			);
+
+			if(empty($this->data['shipinfo']))
+			{
+				$this->data['shipinfo'] = $shipInfo;
+			}
+			else
+			{
+				$this->data['shipinfo']->data = (object) array_merge (
+					(array)$this->data['shipinfo']->data,
+					(array)$shipInfo->data
+				);
+			}
+		}
 
 		foreach($this->data['shipinfo']->data as $shipInfo) {
 
