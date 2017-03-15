@@ -14,8 +14,12 @@ abstract class jpWseTemplate
 	 */
 	public static function render($path, $data = array(), $extension = 'php')
 	{
+		$template  = jpWseConfig::$template;
 		$parts = explode('.', $path);
-		$path = BPATH.'/app/view/templates/'.implode('/', $parts).'.'.$extension;
+		$path = BPATH.'/app/view/templates/'
+			  . $template.'/'
+			  . implode('/', $parts)
+			  . '.'.$extension;
 
 		if(is_file($path)) {
 			if(!isset($data['page'])) {

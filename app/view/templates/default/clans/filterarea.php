@@ -6,4 +6,5 @@
  * @license http://opensource.org/licenses/MIT MIT see LICENSE.md
  */
 
-include BPATH.'/app/view/templates/accounts/filterarea.php';
+$template = jpWseConfig::$template;
+include BPATH.'/app/view/templates/'.$template.'/accounts/filterarea.php';
