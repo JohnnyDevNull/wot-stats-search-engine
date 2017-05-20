@@ -60,6 +60,11 @@ abstract class jpWseConfig
 	public static $cssTheme = '';
 
 	/**
+	 * @var string
+	 */
+	public static $template = 'default';
+
+	/**
 	 * @var string[]
 	 */
 	public static $apiFields = [
