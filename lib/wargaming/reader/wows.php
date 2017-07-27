@@ -21,21 +21,10 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * The list is filtered by initial characters of user name and sorted
 	 * alphabetically.
 	 *
-	 * @param string $search <p>Player name search string. Parameter 'type'
-	 * defines minimum length and type of search. Maximum length: 24 symbols.</p>
-	 * @param string|string[] $fields <p>Response field. The fields are separated
-	 * with commas. Embedded fields are separated with dots.<br>To exclude a
-	 * field, use “-” in front of its name. In case the parameter is not defined,
-	 * the ethod returns all fields.<p>
-	 * @param string $type [optional] <p>Search type. Defines minimum length and
-	 * type of search. Default value: startswith.<br> Valid values:<br>
-	 * "startswith" - Search by initial characters of player name. Minimum
-	 * length: 3 characters. Case insensitive. (by default)<br> "exact" - Search
-	 * by exact match of player name. Minimum length: 1 character. Case
-	 * insensitive.</p>
-	 * @param int $limit [optional] Number of returned entries (fewer can be
-	 * returned, but not more than 100). If the limit sent exceeds 100, an limit
-	 * of 100 is applied (by default).
+	 * @param string          $search
+	 * @param string|string[] $fields
+	 * @param string          $type [optional]
+	 * @param int             $limit [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/account/list/
@@ -53,16 +42,10 @@ class jpWargamingReaderWows extends jpWargamingBase
 	/**
 	 * Request /wows/account/info/<br><br>Method returns player details.
 	 *
-	 * @param int|int[] $accountId Player account ID
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots. <br>
-	 * To exclude a field, use “-” in front of its name. In case the parameter
-	 * is not defined, the method returns all fields.
-	 * @param string $accessToken [optional] Access token is used to access
-	 * personal user data.<br>The token is obtained via authentication and has
-	 * expiration time.
-	 * @param string|string[] $extra [optional] Extra fields to be included into
-	 * the response.
+	 * @param int|int[]       $accountId
+	 * @param string|string[] $fields [optional]
+	 * @param string          $accessToken [optional]
+	 * @param string|string[] $extra [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/account/info/
@@ -84,11 +67,8 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * excluded from response. Hidden profiles are listed in the field
 	 * meta.hidden.
 	 *
-	 * @param string $accountId
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
+	 * @param string          $accountId
+	 * @param string|string[] $fields [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/account/achievements/
@@ -102,13 +82,33 @@ class jpWargamingReaderWows extends jpWargamingBase
 	}
 
 	/**
+	 * Request /wows/account/statsbydate/<br><br>Method returns statistics
+	 * lices by dates in specified time span.
+	 *
+	 * @param int             $accountId
+	 * @param string|string[] $fields
+	 * @param string|string[] $dates  Format: YYYYMMDD; Max. 10
+	 * @param string|string[] $extra
+	 *
+	 * @return mixed
+	 * @see https://developers.wargaming.net/reference/all/wows/account/statsbydate/
+	 */
+	public function getAccountStatsByDate($accountId, $fields = '',
+		$dates = '', $extra = ''
+	) {
+		return $this->request->perform('/wows/account/statsbydate/', [
+			'account_id' => $this->toListString($accountId),
+			'fields' => $this->toListString($fields),
+			'dates' => $this->toListString($dates),
+			'extra' => $this->toListString($extra),
+		]);
+	}
+
+	/**
 	 * Request /wows/encyclopedia/info/<br><br>Method returns information about
 	 * encyclopedia.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
+	 * @param string|string[] $fields [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/info/
@@ -124,18 +124,10 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wot/encyclopedia/ships/<br><br> Method returns the list of ships
 	 * available.
 	 *
-	 * @param int|int[] $shipId [optional] Ship ID
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param string|string[] $nation [optional] Nation
-	 * @param string $type [optional] Vehicle type. Valid values:
-	 * <ul><li>"heavyTank" — Heavy Tank</li>
-	 * <li>"AT-SPG" — Tank Destroyer</li>
-	 * <li>"mediumTank" — Medium Tank</li>
-	 * <li>"lightTank" — Light Tank</li>
-	 * <li>"SPG" — SPG</li></ul>
+	 * @param int|int[]       $shipId [optional]
+	 * @param string|string[] $fields [optional]
+	 * @param string|string[] $nation [optional]
+	 * @param string          $type [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/ships/
@@ -155,10 +147,7 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/achievements/<br><br>Method returns
 	 * information about achievements.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
+	 * @param string|string[] $fields [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/achievements/
@@ -174,29 +163,17 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wot/encyclopedia/shipprofile/<br><br> Method returns parameters
 	 * of ships in all existing configurations.
 	 *
-	 * @param int $shipId Ship ID
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int $artilleryId Main Battery ID. If the module is not indicated,
-	 * module of basic configuration is used.
-	 * @param int $torpedosId Torpedo tubes' ID. If the module is not indicated,
-	 * module of basic configuration is used.
-	 * @param int $fireControlId ID of Gun Fire Control System. If the module is
-	 * not indicated, module of basic configuration is used.
-	 * @param int $flightControlId ID of Flight Control System. If the module is
-	 * not indicated, module of basic configuration is used.
-	 * @param int $hullId Hull ID. If the module is not indicated, module of
-	 * basic configuration is used.
-	 * @param int $endingeId Engine ID. If the module is not indicated, module
-	 * of basic configuration is used.
-	 * @param int $fighterId Fighters' ID. If the module is not indicated,
-	 * module of basic configuration is used.
-	 * @param int $diveBomberId Dive bombers' ID. If the module is not
-	 * indicated, module of basic configuration is used.
-	 * @param int $torpedoBomberId Torpedo bombers' ID. If the module is not
-	 * indicated, module of basic configuration is used.
+	 * @param int             $shipId Ship ID
+	 * @param string|string[] $fields [optional]
+	 * @param int             $artilleryId
+	 * @param int             $torpedosId
+	 * @param int             $fireControlId
+	 * @param int             $flightControlId
+	 * @param int             $hullId
+	 * @param int             $endingeId
+	 * @param int             $fighterId
+	 * @param int             $diveBomberId
+	 * @param int             $torpedoBomberId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/shipprofile/
@@ -227,12 +204,9 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * etc. At least one input filter parameter (module_id, type) is required
 	 * to be indicated.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param string $type Module type.
-	 * @param int $moduleId Module ID
+	 * @param string|string[] $fields [optional]
+	 * @param string $type
+	 * @param int $moduleId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/modules/
@@ -251,12 +225,9 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/exterior/<br><br>Method returns information
 	 * about signals & camouflages.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int $exteriorId Module ID
-	 * @param string $type Module type.
+	 * @param string|string[] $fields [optional]
+	 * @param int $exteriorId
+	 * @param string $type
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/exterior/
@@ -275,11 +246,8 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/upgrades/<br><br>Method returns the list of
 	 * available ship upgrades.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int $upgradeId Upgrade ID
+	 * @param string|string[] $fields [optional]
+	 * @param int             $upgradeId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/upgrades/
@@ -296,10 +264,7 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/accountlevels/<br><br>Method returns
 	 * information about Service Record levels.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
+	 * @param string|string[] $fields [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/accountlevels/
@@ -315,11 +280,8 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/crews/<br><br>Method returns the information
 	 * about Commanders.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int|int[] $commanderId Commander ID
+	 * @param string|string[] $fields [optional]
+	 * @param int|int[] $commanderId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/crews/
@@ -336,11 +298,8 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/crewskills/<br><br>Method returns the
 	 * information about Commanders' skills.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int|int[] $skillId Skill ID
+	 * @param string|string[] $fields [optional]
+	 * @param int|int[] $skillId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/crewskills/
@@ -357,11 +316,8 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/crewranks/<br><br>Method returns the
 	 * information about Commanders' ranks.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param string $nation Nation
+	 * @param string|string[] $fields [optional]
+	 * @param string $nation [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/crewranks/
@@ -378,10 +334,7 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/encyclopedia/battletypes/<br><br>The method returns
 	 * information about battle types.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
+	 * @param string|string[] $fields [optional]
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/battletypes/
@@ -398,12 +351,9 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * each ship of a player. Accounts with hidden game profiles are excluded
 	 * from response. Hidden profiles are listed in the field meta.hidden.
 	 *
-	 * @param int $accountId
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int|int[] $seasonId
+	 * @param int             $accountId
+	 * @param string|string[] $fields [optional]
+	 * @param int|int[]       $seasonId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/encyclopedia/battletypes/
@@ -421,20 +371,17 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * Request /wows/seasons/info/<br><br>Method returns information about
 	 * Ranked Battles seasons.
 	 *
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param int $seasonId Season ID
+	 * @param string|string[] $fields [optional]
+	 * @param int             $seasonId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/seasons/info/
 	 */
 	public function getSeasonsInfo($fields = '', $seasonId = 0)
 	{
-		return $this->request->perform('/wows/ships/stats/', [
+		return $this->request->perform('/wows/seasons/info/', [
 			'fields' => $this->toListString($fields),
-			'extra' => $this->toListString($seasonId),
+			'season_id' => $this->toListString($seasonId),
 		]);
 	}
 
@@ -444,15 +391,11 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * are excluded from response. Hidden profiles are listed in the field
 	 * meta.hidden.
 	 *
-	 * @param int $accountId Player account ID
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param string $accessToken Access token is used to access personal user
-	 * data. The token is obtained via authentication and has expiration time.
-	 * @param int $seasonId Season ID
-	 * @param int $shipId Ship ID
+	 * @param int             $accountId
+	 * @param string|string[] $fields [optional]
+	 * @param string          $accessToken
+	 * @param int             $seasonId
+	 * @param int             $shipId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/seasons/shipstats/
@@ -460,7 +403,7 @@ class jpWargamingReaderWows extends jpWargamingBase
 	public function getSeasonsShipstats($accountId, $fields = '',
 		$accessToken = '', $seasonId = 0, $shipId = 0
 	) {
-		return $this->request->perform('/wows/ships/shipstats/', [
+		return $this->request->perform('/wows/seasons/shipstats/', [
 			'account_id' => $accountId,
 			'fields' => $this->toListString($fields),
 			'access_token' => $accessToken,
@@ -475,14 +418,10 @@ class jpWargamingReaderWows extends jpWargamingBase
 	 * are excluded from response. Hidden profiles are listed in the field
 	 * meta.hidden.
 	 *
-	 * @param int $accountId Player account ID
-	 * @param string|string[] $fields [optional] Response field. The fields are
-	 * separated with commas. Embedded fields are separated with dots.<br>To
-	 * exclude a field, use “-” in front of its name. In case the parameter is
-	 * not defined, the method returns all fields.
-	 * @param string $accessToken Access token is used to access personal user
-	 * data. The token is obtained via authentication and has expiration time.
-	 * @param int $seasonId Season ID
+	 * @param int             $accountId
+	 * @param string|string[] $fields [optional]
+	 * @param string          $accessToken
+	 * @param int             $seasonId
 	 *
 	 * @return mixed
 	 * @see https://eu.wargaming.net/developers/api_reference/wows/seasons/accountinfo/
@@ -490,11 +429,95 @@ class jpWargamingReaderWows extends jpWargamingBase
 	public function getSeasonsAccountinfo($accountId, $fields = '',
 		$accessToken = '', $seasonId = 0
 	) {
-		return $this->request->perform('/wows/ships/accountinfo/', [
+		return $this->request->perform('/wows/seasons/accountinfo/', [
 			'account_id' => $accountId,
 			'fields' => $this->toListString($fields),
 			'access_token' => $accessToken,
 			'season_id' => $seasonId,
+		]);
+	}
+
+	/**
+	 * Request /wows/clans/list/<br><br> Method searches through clans
+	 * and sorts them in a specified order.
+	 *
+	 * @param string          $search
+	 * @param string|string[] $fields [optional]
+	 * @param int             $limit [optional]
+	 * @param int             $pageNo [optional]
+	 *
+	 * @return mixed
+	 * @see https://developers.wargaming.net/reference/all/wows/clans/list/
+	 */
+	public function getClanList($search, $fields = '',
+		$limit = 100, $pageNo = 1
+	) {
+		return $this->request->perform('/wows/clans/list/', [
+			'search' => $search,
+			'fields' => $this->toListString($fields),
+			'limit' => $limit,
+			'page_no' => $pageNo,
+		]);
+	}
+
+	/**
+	 * Request /wows/clans/info/<br><br>Method returns detailed clan
+	 * information.
+	 *
+	 * @param int|int[]       $clanId
+	 * @param string|string[] $fields
+	 * @param string|string[] $extra
+	 *
+	 * @return mixed
+	 * @see https://developers.wargaming.net/reference/all/wows/clans/info/
+	 */
+	public function getClanInfo($clanId, $fields = '',
+		$extra = ''
+	) {
+		return $this->request->perform('/wows/clans/info/', [
+			'clan_id' => $this->toListString($clanId),
+			'fields' => $this->toListString($fields),
+			'extra' => $this->toListString($extra),
+		]);
+	}
+
+	/**
+	 * Request /wows/clans/accountinfo/<br><br>Method returns player clan
+	 * data. Player clan data exist only for accounts, that were participating
+	 * in clan activities: sent join requests, were clan members etc.
+	 *
+	 * @param int|int[]       $accountId
+	 * @param string|string[] $fields [optional]
+	 * @param string|string[] $extra [optional]
+	 *
+	 * @return mixed
+	 * @see https://developers.wargaming.net/reference/all/wows/clans/accountinfo/
+	 */
+	public function getClanAccountInfo($accountId, $fields = '',
+		$extra = ''
+	) {
+		return $this->request->perform('/wows/clans/accountinfo/', [
+			'account_id' => $this->toListString($accountId),
+			'fields' => $this->toListString($fields),
+			'extra' => $this->toListString($extra),
+		]);
+	}
+
+	/**
+	 * Request /wows/clans/glossary/<br><br> Method returns information on
+	 * clan entities.
+	 *
+	 * @param string|string[] $fields [optional]
+	 * @param string|string[] $extra [optional]
+	 *
+	 * @return mixed
+	 * @see https://developers.wargaming.net/reference/all/wows/clans/glossary/
+	 */
+	public function getClanGlossary($fields = '', $extra = '')
+	{
+		return $this->request->perform('/wows/clans/glossary/', [
+			'fields' => $this->toListString($fields),
+			'extra' => $this->toListString($extra),
 		]);
 	}
 }
